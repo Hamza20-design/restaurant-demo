@@ -3,262 +3,434 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Rolls & More - Order Now</title>
+<title>Abdul Hadi Fast Food - Order Now</title>
+
 <style>
-  :root {
-    --bg: #f3ede7;
-    --card: #fff8f1;
-    --accent: #d97706;
-    --accent-light: #fbbf24;
-    --green: #25D366;
-    --text: #3a2f23;
-    --muted: #6b6b6b;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Poppins", sans-serif; }
-  body { background: var(--bg); color: var(--text); line-height: 1.4; }
+ :root {
+   --bg: #f3ede7;
+   --card: #fff8f1;
+   --accent: #d97706;
+   --accent-light: #fbbf24;
+   --green: #25D366;
+   --text: #3a2f23;
+   --muted: #6b6b6b;
+ }
+ * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Poppins", sans-serif; }
+ body { background: var(--bg); color: var(--text); line-height: 1.4; }
 
-  header {
-    background: linear-gradient(90deg, var(--accent), var(--accent-light));
-    color: white; text-align: center; padding: 14px; font-weight: 700;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  }
+ header {
+   background: linear-gradient(90deg, var(--accent), var(--accent-light));
+   color: white; 
+   text-align: center; 
+   padding: 16px; 
+   font-weight: 900;
+   font-size: 26px;
+   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 16px;
+ }
+ header img {
+   height: 45px;
+ }
 
-  .hero {
-    text-align: center; padding: 40px 16px;
-  }
-  .hero h1 { font-size: 28px; margin-bottom: 8px; }
-  .hero p { color: var(--muted); }
+ .hero {
+   text-align: center; padding: 40px 16px;
+ }
+ .hero h1 { font-size: 28px; margin-bottom: 8px; }
+ .hero p { color: var(--muted); }
 
-  section { max-width: 1200px; margin: 20px auto; padding: 0 18px; }
+ section { max-width: 1200px; margin: 20px auto; padding: 0 18px; }
+ h2 { color: var(--accent); margin-bottom: 12px; font-size: 24px; }
 
-  .popular h2, .menu h2 { color: var(--accent); margin-bottom: 12px; }
+ .menu-grid, .deals-grid {
+   display: flex;
+   gap: 16px;
+   flex-wrap: wrap;
+   justify-content: center;
+ }
 
-  .popular-items, .menu-grid {
-    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
-  }
+ .card {
+   background: var(--card);
+   border-radius: 12px;
+   width: 220px;
+   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+   text-align: center;
+   padding: 12px;
+ }
+ .card img {
+   width: 100%;
+   height: 150px;
+   object-fit: cover;
+   border-radius: 10px;
+ }
+ .title { font-weight: 700; margin-top: 8px; }
+ .price { color: var(--accent); font-weight: 700; margin: 6px 0; }
 
-  .card {
-    background: var(--card);
-    border-radius: 12px;
-    width: 220px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-    text-align: center;
-    padding: 12px;
-  }
+ .controls { display: flex; justify-content: center; gap: 10px; }
+ .qty-btn {
+   border: none; background: var(--accent); color: #fff;
+   width: 32px; height: 32px; border-radius: 50%; 
+   font-size: 18px; cursor: pointer;
+ }
 
-  .card img {
-    width: 100%; height: 150px; object-fit: cover; border-radius: 10px;
-  }
-  .card .title { font-weight: 700; margin-top: 8px; }
-  .card .price { color: var(--accent); font-weight: 700; margin: 6px 0; }
+ /* cart bar */
+ .cart-bar {
+   position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+   background: linear-gradient(90deg, var(--accent), var(--accent-light));
+   color: #fff; padding: 14px 22px; border-radius: 999px;
+   display: flex; align-items: center; gap: 16px;
+   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+   cursor: pointer; font-weight: 700; z-index: 1200;
+ }
 
-  .controls { display: flex; justify-content: center; gap: 10px; }
-  .qty-btn {
-    border: none; background: var(--accent); color: #fff; width: 32px; height: 32px;
-    border-radius: 50%; font-size: 18px; cursor: pointer;
-  }
+ /* checkout */
+ .checkout-panel {
+   position: fixed; left: 0; right: 0; bottom: -100%;
+   background: #fff; border-radius: 18px 18px 0 0;
+   box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
+   transition: bottom 0.4s ease;
+   padding: 20px; max-height: 85vh; overflow-y: auto; z-index: 2000;
+ }
+ .checkout-panel.active { bottom: 0; }
 
-  /* cart bar */
-  .cart-bar {
-    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-    background: linear-gradient(90deg, var(--accent), var(--accent-light));
-    color: #fff; padding: 14px 22px; border-radius: 999px;
-    display: flex; align-items: center; gap: 16px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    cursor: pointer;
-    font-weight: 700;
-    z-index: 1200;
-  }
+ .checkout-header { display: flex; justify-content: space-between; align-items: center; }
+ .checkout-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
 
-  /* checkout panel */
-  .checkout-panel {
-    position: fixed; left: 0; right: 0; bottom: -100%;
-    background: #fff; border-radius: 18px 18px 0 0;
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
-    transition: bottom 0.4s ease;
-    padding: 20px;
-    max-height: 85vh;
-    overflow-y: auto;
-    z-index: 2000;
-  }
-  .checkout-panel.active { bottom: 0; }
+ .checkout-item {
+   display: flex; align-items: center; gap: 12px;
+   background: var(--card); border-radius: 12px;
+   padding: 10px;
+   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+ }
+ .checkout-item img { width: 70px; height: 60px; object-fit: cover; border-radius: 10px; }
 
-  .checkout-header { display: flex; justify-content: space-between; align-items: center; }
-  .checkout-header h3 { color: var(--accent); }
-  .close-btn { border: none; background: var(--accent); color: #fff; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+ .grand { font-weight: 800; font-size: 18px; margin-bottom: 14px; }
 
-  .checkout-list {
-    display: flex; flex-direction: column; gap: 12px; margin-top: 16px;
-  }
-  .checkout-item {
-    display: flex; align-items: center; gap: 12px;
-    background: var(--card);
-    border-radius: 12px;
-    padding: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  .checkout-item img {
-    width: 70px; height: 60px; object-fit: cover; border-radius: 10px;
-  }
-  .checkout-item .info { flex: 1; }
-  .checkout-item .info h4 { margin-bottom: 4px; }
-  .checkout-item .info p { color: var(--muted); font-size: 14px; }
-  .checkout-item .price { color: var(--accent); font-weight: 700; }
-
-  .checkout-bottom {
-    text-align: center; margin-top: 20px;
-  }
-  .grand { font-weight: 800; font-size: 18px; margin-bottom: 14px; }
-  .order-btn {
-    background: var(--green);
-    border: none;
-    color: white;
-    padding: 16px 28px;
-    font-size: 18px;
-    border-radius: 12px;
-    font-weight: 800;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  }
-
+ .order-btn {
+   background: var(--green); border: none;
+   padding: 16px 28px; font-size: 18px;
+   border-radius: 12px; font-weight: 800;
+   cursor: pointer; color: white;
+ }
 </style>
 </head>
+
 <body>
 
-<header>Rolls & More 🍴</header>
+<header>
+ <img src="logo.png" alt="Logo">
+ Abdul Hadi Fast Food
+</header>
 
-<main>
-  <div class="hero">
-    <h1>Welcome to Rolls & More!</h1>
-    <p>Fresh, tasty and fast! Choose your favorites below 👇</p>
-  </div>
+<div class="hero">
+ <h1>Fresh – Tasty – Fast!</h1>
+ <p>Select your food and order directly on WhatsApp</p>
+</div>
 
-  <section class="popular">
-    <h2>🔥 Popular Items</h2>
-    <div class="popular-items" id="popular"></div>
-  </section>
+<!-- DEALS -->
+<section>
+ <h2>🔥 Special Deals</h2>
+ <div class="deals-grid" id="deals"></div>
+</section>
 
-  <section class="menu">
-    <h2>🍗 Full Menu</h2>
-    <div class="menu-grid" id="menu"></div>
-  </section>
-</main>
+<!-- FULL MENU -->
+<section>
+ <h2>📜 Full Menu</h2>
+ <div class="menu-grid" id="menu"></div>
+</section>
 
-<!-- cart bar -->
+<!-- CART -->
 <div class="cart-bar" onclick="openCheckout()">
-  🛒 <span id="cartCount">0</span> items — <span id="cartTotal">Rs. 0</span>
+ Cart: <span id="cartCount">0</span> items — <span id="cartTotal">Rs. 0</span>
 </div>
 
-<!-- checkout panel -->
+<!-- CHECKOUT -->
 <div class="checkout-panel" id="checkoutPanel">
-  <div class="checkout-header">
-    <h3>Your Order</h3>
-    <button class="close-btn" onclick="closeCheckout()">Close</button>
-  </div>
+ <div class="checkout-header">
+   <h3>Your Order</h3>
+   <button class="order-btn" style="background:#d33" onclick="closeCheckout()">Close</button>
+ </div>
 
-  <div class="checkout-list" id="checkoutList"></div>
+ <div class="checkout-list" id="checkoutList"></div>
 
-  <div class="checkout-bottom">
-    <div class="grand" id="grandTotal">Total: Rs. 0</div>
-    <button class="order-btn" onclick="sendOrder()">📦 Order on WhatsApp</button>
-  </div>
+ <div class="grand" id="grandTotal">Total: Rs. 0</div>
+ <button class="order-btn" onclick="sendOrder()">Order on WhatsApp</button>
 </div>
 
-<footer style="text-align:center;padding:16px;color:var(--muted)">© 2025 Rolls & More — Demo</footer>
+<footer style="text-align:center;padding:16px;color:var(--muted)">
+ © 2025 Abdul Hadi Fast Food
+</footer>
 
 <script>
+/* ------------------------------ MENU DATA ------------------------------ */
 const items = [
-  {id:'roll',name:'Chicken Roll',price:250,img:'chicken-roll.jpg'},
-  {id:'burger',name:'Cheese Burger',price:350,img:'burger.jpg'},
-  {id:'pizza',name:'BBQ Pizza',price:800,img:'pizza.jpg'},
-  {id:'fries',name:'Masala Fries',price:180,img:'fries.jpg'},
-  {id:'sandwich',name:'Club Sandwich',price:300,img:'club-sandwich.jpg'},
-  {id:'drink',name:'Cold Drink',price:80,img:'drink.jpg'}
+
+/* BURGERS */
+{name:"Zinger Burger", price:250},
+{name:"Zinger Cheese Burger", price:300},
+{name:"Mini Burger", price:200},
+{name:"Mini Burger Cheese", price:250},
+{name:"Jumbo Zinger", price:450},
+{name:"Jumbo Zinger Cheese", price:500},
+{name:"Chicken Burger", price:250},
+{name:"Chicken Cheese Burger", price:300},
+{name:"Chicken Jumbo Burger", price:450},
+{name:"Beef Burger", price:300},
+{name:"Beef Cheese Burger", price:350},
+{name:"Beef Jumbo Burger", price:450},
+{name:"Two in One Burger", price:500},
+
+/* SANDWICHES */
+{name:"Chicken Sandwich", price:200},
+{name:"Chicken Cheese Sandwich", price:250},
+{name:"Club Sandwich", price:250},
+{name:"Club Cheese Sandwich", price:300},
+{name:"Crispy Sandwich", price:300},
+{name:"Crispy Cheese Sandwich", price:350},
+{name:"BBQ Sandwich", price:350},
+{name:"BBQ Club Sandwich", price:400},
+{name:"BBQ Cheese Sandwich", price:400},
+{name:"Malai Sandwich", price:400},
+{name:"Malai Club Sandwich", price:450},
+{name:"Malai Cheese Sandwich", price:450},
+
+/* BROAST */
+{name:"Qtr Broast Chest", price:400},
+{name:"Qtr Broast Leg", price:350},
+{name:"Crispy Broast Chest", price:400},
+{name:"Crispy Broast Leg", price:400},
+{name:"Spicy Broast", price:500},
+
+/* NAAN */
+{name:"Chapati", price:20},
+{name:"Puri Paratha Small", price:50},
+{name:"Puri Paratha Large", price:80},
+
+/* FRIES */
+{name:"Plain Fries Small", price:50},
+{name:"Plain Fries Large", price:100},
+{name:"Masala Fries", price:100},
+{name:"Mayo Fries", price:150},
+{name:"Mayo Garlic Fries", price:200},
+
+/* PIZZA FRIES */
+{name:"Pizza Fries Medium", price:300},
+{name:"Pizza Fries Large", price:400},
+{name:"Matkka Fries Medium", price:200},
+{name:"Matkka Fries Large", price:450},
+{name:"Chicken Fries Medium", price:250},
+{name:"Chicken Fries Large", price:350},
+
+/* BOTI */
+{name:"Chicken Boti", price:350},
+{name:"Chicken Bihari Boti", price:400},
+{name:"Malai Boti", price:400},
+{name:"Beef Boti", price:450},
+{name:"Beef Bihari Boti", price:500},
+
+/* BBQ */
+{name:"Chicken Tikka Chest", price:400},
+{name:"Chicken Tikka Leg", price:350},
+{name:"Malai Tikka Chest", price:450},
+{name:"Bihari Tikka Chest", price:450},
+{name:"Green Tikka Chest", price:450},
+
+/* ICE CREAM */
+{name:"Single Scope", price:100},
+{name:"Double Scope", price:180},
+{name:"A.H Special Falooda", price:350},
+
+/* SOUP */
+{name:"Hot & Sour Soup", price:180},
+{name:"Corn Soup", price:150},
+{name:"Vegetable Soup", price:130},
+
+/* SHAKES */
+{name:"Kitkat Shake", price:300},
+{name:"Oreo Shake", price:250},
+{name:"Strawberry Shake", price:250},
+{name:"Mango Shake", price:250},
+{name:"Vanilla Shake", price:250},
+{name:"Blueberry Shake", price:250},
+{name:"Chocolate Shake", price:250},
+{name:"Cadbury Shake", price:250},
+{name:"Kulfa Shake", price:250},
+{name:"Tutti Frutti Shake", price:250},
+{name:"Roasted Shake", price:250},
+{name:"Pista Shake", price:250},
+{name:"Ice Cream Milk Shake", price:250},
+{name:"Lemon Glacier Mint", price:200},
+
+/* KABAB */
+{name:"Reshmy Kabab", price:400},
+{name:"Gola Kabab", price:400},
+{name:"Dhaga Kabab", price:500},
+{name:"Turkish Kabab", price:500},
+{name:"Sekh Kabab", price:400},
+{name:"Chandan Kabab", price:500},
+
+/* ROLLS */
+{name:"Chicken Roll", price:160},
+{name:"Chicken Cheese Roll", price:200},
+{name:"Chicken Mayo Roll", price:250},
+{name:"Chicken Kabab Roll", price:160},
+{name:"Beef Roll", price:200},
+{name:"Beef Mayo Roll", price:250},
+{name:"Beef Cheese Roll", price:250},
+{name:"Beef Kabab Roll", price:200},
+{name:"Chicken Malai Roll", price:230},
+{name:"Chicken Malai Mayo Roll", price:240},
+{name:"Zinger Roll", price:180},
+{name:"Zinger Cheese Roll", price:230},
+{name:"Shawarma Roll", price:250},
+
+/* BEVERAGES */
+{name:"Cold Drink 300ml", price:70},
+{name:"Cold Drink 500ml", price:100},
+{name:"Cold Drink 1 Litre", price:150},
+{name:"Cold Drink 1.5 Litre", price:200},
+{name:"Cold Drink 2.5 Litre", price:250},
+{name:"Sting 300ml", price:90},
+{name:"Sting 500ml", price:120},
+{name:"Mineral Water Small", price:50},
+{name:"Mineral Water 1.5L", price:100},
+
+/* EXTRAS */
+{name:"Mayo Dip", price:80},
+{name:"Ketchup Dip", price:80},
+{name:"Raita", price:80},
+{name:"Cheese Slice", price:50},
+{name:"Coleslaw", price:80},
 ];
 
+/* ------------------------------ DEALS ------------------------------ */
+const deals = [
+ {name:"Deal 1", price:1000, detail:"Buy 4 Zinger & Get 1 Free"},
+ {name:"Deal 2", price:550, detail:"2 Zinger Burger + 1 Next Cola 245ml"},
+ {name:"Deal 3", price:600, detail:"1 Zinger + 1 Club Sandwich + Next Cola 1L"},
+ {name:"Deal 4", price:500, detail:"2 Zinger Burger + Free Fries"},
+ {name:"Deal 5", price:750, detail:"1 Zinger + 1 Club + 2 Ice Cream"},
+ {name:"Deal 6", price:850, detail:"3 Zinger + Next Cola 1L"},
+ {name:"Deal 7", price:800, detail:"Qtr Broast (Leg) + Club Sandwich + Zinger"},
+ {name:"Deal 8", price:850, detail:"2 Zinger + Club + Chicken Roll"},
+ {name:"Family Deal", price:0, detail:"2 Zinger, 2 Chicken Burger, Club, 2 Zinger Roll, Next Cola 1L"},
+];
+
+/* ------------------------------ RENDERING ------------------------------ */
 let cart = {};
 
 function renderMenu(){
-  const menu=document.getElementById('menu');
-  const popular=document.getElementById('popular');
-  items.forEach(it=>{
-    const card=`
-    <div class="card">
-      <img src="${it.img}" alt="${it.name}">
-      <div class="title">${it.name}</div>
-      <div class="price">Rs. ${it.price}</div>
-      <div class="controls">
-        <button class="qty-btn" onclick="changeQty('${it.id}',-1)">−</button>
-        <div id="qty-${it.id}">0</div>
-        <button class="qty-btn" onclick="changeQty('${it.id}',1)">+</button>
-      </div>
-    </div>`;
-    menu.innerHTML+=card;
-    if(['roll','burger','pizza','fries'].includes(it.id))
-      popular.innerHTML+=card;
-  });
+ const box = document.getElementById("menu");
+ items.forEach((it,i)=>{
+   box.innerHTML += `
+   <div class="card">
+     <img src="logo.png">
+     <div class="title">${it.name}</div>
+     <div class="price">Rs. ${it.price}</div>
+     <div class="controls">
+       <button class="qty-btn" onclick="changeQty('item${i}',-1)">-</button>
+       <div id="qty-item${i}">0</div>
+       <button class="qty-btn" onclick="changeQty('item${i}',1)">+</button>
+     </div>
+   </div>`;
+   cart[`item${i}`] = {name:it.name, price:it.price, qty:0};
+ });
 }
-renderMenu();
 
+function renderDeals(){
+ const box = document.getElementById("deals");
+ deals.forEach((d,i)=>{
+   box.innerHTML += `
+   <div class="card">
+     <img src="logo.png">
+     <div class="title">${d.name}</div>
+     <p>${d.detail}</p>
+     <div class="price">Rs. ${d.price}</div>
+     <div class="controls">
+       <button class="qty-btn" onclick="changeQty('deal${i}',-1)">-</button>
+       <div id="qty-deal${i}">0</div>
+       <button class="qty-btn" onclick="changeQty('deal${i}',1)">+</button>
+     </div>
+   </div>`;
+   cart[`deal${i}`] = {name:d.name, price:d.price, qty:0};
+ });
+}
+
+renderMenu();
+renderDeals();
+
+/* ------------------------------ CART LOGIC ------------------------------ */
 function changeQty(id,delta){
-  const item=items.find(i=>i.id===id);
-  if(!item)return;
-  if(!cart[id])cart[id]={...item,qty:0};
-  cart[id].qty+=delta;
-  if(cart[id].qty<0)cart[id].qty=0;
-  document.getElementById('qty-'+id).innerText=cart[id].qty;
-  updateCart();
+ cart[id].qty += delta;
+ if(cart[id].qty < 0) cart[id].qty = 0;
+ document.getElementById(`qty-${id}`).innerText = cart[id].qty;
+ updateCart();
 }
 
 function updateCart(){
-  let qty=0,total=0;
-  for(let k in cart){qty+=cart[k].qty;total+=cart[k].qty*cart[k].price;}
-  document.getElementById('cartCount').innerText=qty;
-  document.getElementById('cartTotal').innerText='Rs. '+total;
-  document.getElementById('grandTotal').innerText='Total: Rs. '+total;
-  renderCheckout();
+ let qty = 0, total = 0;
+ for(let k in cart){
+   if(cart[k].qty>0){
+     qty += cart[k].qty;
+     total += cart[k].qty * cart[k].price;
+   }
+ }
+ document.getElementById("cartCount").innerText = qty;
+ document.getElementById("cartTotal").innerText = "Rs. " + total;
+ document.getElementById("grandTotal").innerText = "Total: Rs. " + total;
+ renderCheckout();
 }
 
 function renderCheckout(){
-  const box=document.getElementById('checkoutList');
-  box.innerHTML='';
-  for(let k in cart){
-    const it=cart[k]; if(it.qty<=0)continue;
-    box.innerHTML+=`
-      <div class="checkout-item">
-        <img src="${it.img}" alt="${it.name}">
-        <div class="info">
-          <h4>${it.name}</h4>
-          <p>${it.qty} x Rs. ${it.price}</p>
-        </div>
-        <div class="price">Rs. ${it.qty*it.price}</div>
-      </div>`;
-  }
+ const box = document.getElementById("checkoutList");
+ box.innerHTML = "";
+ for(let k in cart){
+   let it = cart[k];
+   if(it.qty > 0){
+     box.innerHTML += `
+     <div class="checkout-item">
+       <img src="logo.png">
+       <div class="info">
+         <h4>${it.name}</h4>
+         <p>${it.qty} × Rs. ${it.price}</p>
+       </div>
+       <div class="price">Rs. ${it.qty * it.price}</div>
+     </div>`;
+   }
+ }
+ if(box.innerHTML === "") box.innerHTML = "<p>Your cart is empty.</p>";
 }
 
 function openCheckout(){
-  const totalItems=Object.values(cart).reduce((a,b)=>a+b.qty,0);
-  if(totalItems===0){alert('Add items to cart first!');return;}
-  document.getElementById('checkoutPanel').classList.add('active');
+ let totalItems = Object.values(cart).reduce((a,b)=>a+b.qty,0);
+ if(totalItems === 0) return alert("Add items first!");
+ document.getElementById("checkoutPanel").classList.add("active");
 }
+
 function closeCheckout(){
-  document.getElementById('checkoutPanel').classList.remove('active');
+ document.getElementById("checkoutPanel").classList.remove("active");
 }
 
 function sendOrder(){
-  let msg="Assalam o Alaikum! I want to place an order:%0A";
-  let total=0;
-  for(let k in cart){
-    const it=cart[k];
-    if(it.qty>0){
-      msg+=`• ${it.name} x${it.qty} = Rs ${it.qty*it.price}%0A`;
-      total+=it.qty*it.price;
-    }
-  }
-  msg+=`%0ATotal: Rs ${total}%0AName: [Your Name]%0AAddress: [Your Address]`;
-  const phone='+923001234567'; // change to your WhatsApp number
-  window.open(`https://wa.me/${phone.replace('+','')}?text=${msg}`,'_blank');
+ let msg = "Assalam o Alaikum! I want to place an order:%0A%0A";
+ let total = 0;
+
+ for(let k in cart){
+   let it = cart[k];
+   if(it.qty>0){
+     msg += `• ${it.name} x${it.qty} = Rs ${it.qty*it.price}%0A`;
+     total += it.qty * it.price;
+   }
+ }
+
+ msg += `%0ATotal: Rs ${total}%0AName: [Your Name]%0AAddress: [Your Address]`;
+
+ const number = "03158377135";
+ window.open(`https://wa.me/${number}?text=${msg}`,"_blank");
 }
 </script>
+
 </body>
 </html>
