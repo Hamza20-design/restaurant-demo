@@ -4,707 +4,717 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Abdul Hadi Fast Food</title>
-<link rel="icon" href="images/logo.png" />
 <style>
- :root{
-  --bg:#f9f7f6;
-  --card:#ffffff;
+:root{
+  --bg:#f7f3f1;
+  --card:#fff;
   --accent:#800000; /* maroon */
-  --accent-light:#a63b3b;
+  --accent-light:#9b2b2b;
   --muted:#6b6b6b;
   --green:#25D366;
-  --shadow: 0 6px 18px rgba(0,0,0,0.08);
- }
- *{box-sizing:border-box;margin:0;padding:0;font-family:Inter, Poppins, system-ui, Arial;}
- body{background:var(--bg);color:#222;line-height:1.4;-webkit-font-smoothing:antialiased;}
- header.site-header{
+  --text:#2b2b2b;
+}
+*{box-sizing:border-box;font-family:Inter, Poppins, sans-serif;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.4;
+  padding-bottom:160px;
+  overflow-x:hidden; /* prevent horizontal shift on mobile */
+}
+header{
   background:linear-gradient(90deg,var(--accent),var(--accent-light));
-  color:#fff;padding:18px 14px;border-bottom:4px solid rgba(0,0,0,0.06);
-  display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap;
-  position:sticky;top:0;z-index:900;
- }
- .logo{display:flex;align-items:center;gap:12px}
- .logo img{width:64px;height:64px;object-fit:contain;border-radius:10px;border:2px solid rgba(255,255,255,0.12);background:#fff}
- .brand{font-weight:800;font-size:24px;letter-spacing:0.6px}
- .hero{padding:18px;text-align:center}
- .category-nav{display:flex;gap:10px;overflow:auto;padding:10px 14px;justify-content:center}
- .cat-btn{background:#fff;border-radius:999px;padding:8px 12px;border:1px solid rgba(0,0,0,0.06);font-weight:700;color:var(--accent);cursor:pointer;white-space:nowrap;box-shadow:var(--shadow)}
- main{max-width:1100px;margin:16px auto;padding:0 14px 90px;}
- .section-title{display:flex;flex-direction:column;align-items:center;margin:12px 0 8px}
- .section-title h2{background:var(--card);padding:8px 18px;border-radius:999px;color:var(--accent);font-size:20px;font-weight:800;border:3px solid rgba(128,0,0,0.06)}
- .section-banner{height:8px;width:90px;background:var(--accent);border-radius:6px;margin-top:8px;opacity:0.95}
- .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
- /* mobile two per row as requested */
- @media (max-width:800px){ .grid{grid-template-columns:repeat(2,1fr)} header.site-header{padding:12px} .brand{font-size:20px} .logo img{width:56px;height:56px} }
- @media (max-width:420px){ .grid{grid-template-columns:repeat(2,1fr);gap:10px} .card img{height:120px} .brand{font-size:18px} }
+  color:#fff;padding:18px 12px;display:flex;align-items:center;gap:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.12);position:sticky;top:0;z-index:2000;
+}
+.header-logo{width:72px;height:72px;border-radius:10px;object-fit:contain}
+.header-title{font-weight:900;font-size:30px;letter-spacing:0.5px}
+.header-sub{font-size:12px;opacity:0.95}
+.container{max-width:1100px;margin:18px auto;padding:0 14px}
 
- .card{background:var(--card);border-radius:12px;padding:8px;box-shadow:var(--shadow);text-align:center;overflow:hidden;display:flex;flex-direction:column;gap:8px}
- .card img{width:100%;height:140px;object-fit:cover;border-radius:10px}
- .title{font-weight:800;font-size:15px}
- .price{color:var(--accent);font-weight:800}
- .controls{display:flex;justify-content:center;align-items:center;gap:8px}
- .qty-controls{display:inline-flex;align-items:center;gap:8px}
- .qty-btn{width:36px;height:36px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-weight:800;font-size:18px;cursor:pointer;transition:transform .12s}
- .qty-btn:active{transform:scale(.98)}
- .buy-btn{background:linear-gradient(90deg,var(--accent),var(--accent-light));color:#fff;border:none;padding:10px 12px;border-radius:10px;font-weight:800;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,0.18);transition:transform .12s}
- .buy-btn:active{transform:translateY(1px)}
- .muted{color:var(--muted);font-size:13px}
- .deals-list{display:flex;flex-direction:column;gap:10px}
- .deal-card{background:linear-gradient(90deg,#fff,#fff);border-radius:12px;padding:10px;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow)}
- .deal-card .d-left{font-weight:800}
- /* Cart bar */
- .cart-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;background:linear-gradient(90deg,var(--accent),var(--accent-light));color:#fff;padding:14px 18px;border-radius:999px;display:flex;gap:12px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,0.25);z-index:1200;cursor:pointer;font-weight:800}
- /* checkout panel */
- .checkout-panel{position:fixed;left:0;right:0;bottom:-120%;background:#fff;border-radius:14px 14px 0 0;padding:16px;box-shadow:0 -12px 40px rgba(0,0,0,0.18);transition:bottom .35s;z-index:2000;max-height:86vh;overflow:auto}
- .checkout-panel.active{bottom:0}
- .checkout-item{display:flex;gap:12px;align-items:center;border-radius:10px;padding:10px;background:#fff8f5;box-shadow:var(--shadow);margin-bottom:8px}
- .checkout-item img{width:70px;height:60px;object-fit:cover;border-radius:8px}
- .checkout-item .info{flex:1}
- .grand{font-weight:900;font-size:18px;color:var(--accent)}
- .order-btn{background:var(--green);border:none;color:#fff;padding:12px 18px;border-radius:10px;font-weight:800;cursor:pointer;width:100%}
- /* options modal */
- .modal{position:fixed;left:0;right:0;top:0;bottom:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:2500;padding:18px}
- .modal.active{display:flex}
- .modal-card{background:#fff;border-radius:12px;padding:16px;max-width:520px;width:100%;box-shadow:var(--shadow)}
- .opt-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
- .opt-btn{border:1px solid #ddd;padding:8px 12px;border-radius:10px;cursor:pointer;background:#fff}
- .opt-btn.active{border-color:var(--accent);background:linear-gradient(90deg,#fff,#ffecec)}
- .small-muted{font-size:13px;color:var(--muted)}
- /* little animations */
- .pulse{animation:pop .4s}
- @keyframes pop{0%{transform:scale(.98)}100%{transform:scale(1)}}
- .center{display:flex;justify-content:center;align-items:center}
- footer{padding:18px;text-align:center;color:var(--muted);margin-top:18px}
- .section-sub{font-size:13px;color:var(--muted);text-align:center;margin-bottom:6px}
- /* anchor offset so heading is visible */
- .anchor{scroll-margin-top:120px}
+/* category nav */
+.cat-nav{
+  display:flex;gap:8px;overflow:auto;padding:8px 6px;margin-bottom:8px;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none; /* firefox */
+}
+.cat-nav::-webkit-scrollbar{display:none} /* hide scroll on webkit */
+.cat-nav a{white-space:nowrap;padding:8px 12px;border-radius:999px;background:#fff;color:var(--accent);font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,0.06);text-decoration:none}
+
+/* section header */
+.section-header{display:flex;align-items:center;gap:12px;justify-content:center;margin:8px 0 12px 0}
+.section-banner{background:var(--accent);color:#fff;padding:6px 12px;border-radius:8px;font-weight:800;letter-spacing:0.6px}
+.section-title{font-size:20px;font-weight:800;color:var(--accent);text-align:center;margin-top:8px}
+
+/* cards grid */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card{background:var(--card);padding:8px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06);text-align:center;overflow:hidden}
+.card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+.card .name{font-weight:800;margin-top:8px}
+.card .price{color:var(--accent);font-weight:800;margin:6px 0}
+.controls{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:8px}
+.btn{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:800;cursor:pointer;box-shadow:0 6px 14px rgba(0,0,0,0.12);transition:transform 0.12s ease}
+.btn:active{transform:translateY(2px)}
+.qty-controls{display:flex;gap:8px;align-items:center}
+.qty-btn{width:36px;height:36px;border-radius:8px;border:none;background:#eee;font-weight:800;cursor:pointer}
+.qty-num{min-width:32px;text-align:center;font-weight:800}
+
+/* Deals */
+.deals-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.deal-card{background:linear-gradient(180deg,#fff,#fff);padding:12px;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,0.08);width:100%;max-width:900px;display:flex;gap:12px;align-items:center}
+.deal-card img{width:120px;height:80px;object-fit:cover;border-radius:8px}
+.deal-info{flex:1}
+
+/* checkout bar */
+.cart-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;background:linear-gradient(90deg,var(--accent),var(--accent-light));color:#fff;padding:12px 20px;border-radius:999px;font-weight:900;box-shadow:0 8px 24px rgba(0,0,0,0.2);z-index:2000;display:flex;gap:12px;align-items:center}
+.checkout-panel{position:fixed;left:0;right:0;bottom:-110%;background:#fff;border-radius:18px 18px 0 0;padding:16px;box-shadow:0 -8px 30px rgba(0,0,0,0.18);transition:bottom 0.35s ease;max-height:85vh;overflow:auto;z-index:3000}
+.checkout-panel.active{bottom:0}
+.checkout-item{display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid #f1f1f1}
+.checkout-item img{width:70px;height:50px;object-fit:cover;border-radius:8px}
+.grand{font-weight:900;font-size:18px;text-align:right;margin-top:8px}
+
+/* options modal */
+.modal{position:fixed;left:0;right:0;top:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:4000;padding:12px}
+.modal-box{width:100%;max-width:480px;background:#fff;border-radius:12px;padding:14px}
+.option-row{display:flex;gap:8px;align-items:center;margin:8px 0}
+.option-label{flex:1;font-weight:800}
+.option-choice{padding:8px 12px;border-radius:8px;border:1px solid #eee;cursor:pointer}
+.small-muted{font-size:13px;color:var(--muted);margin-top:6px;display:block;text-align:center}
+
+/* responsive */
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:700px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .card img{height:120px}
+  .header-title{font-size:22px}
+  .header-logo{width:56px;height:56px}
+  .header-title{font-size:20px}
+}
 </style>
 </head>
 <body>
-
-<header class="site-header">
-  <div class="logo">
-    <img src="images/logo.png" alt="logo" id="siteLogo">
+<header>
+  <img src="images/logo.png" class="header-logo" alt="logo" />
+  <div>
+    <div class="header-title">Abdul Hadi Fast Food</div>
+    <div class="header-sub">Order online · Confirmed by voice · Fast delivery</div>
   </div>
-  <div class="brand">Abdul Hadi Fast Food</div>
 </header>
 
-<div class="hero center" style="flex-direction:column;gap:6px;">
-  <!-- category nav -->
-  <div class="category-nav" id="categoryNav">
-    <!-- Filled by JS -->
+<div class="container">
+  <!-- categories nav (anchors jump to sections) -->
+  <div class="cat-nav" id="catNav">
+    <a href="#deals">Deals</a>
+    <a href="#burgers">Burgers</a>
+    <a href="#sandwiches">Sandwiches</a>
+    <a href="#broast">Broast</a>
+    <a href="#naan">Naan</a>
+    <a href="#fries">Fries</a>
+    <a href="#pizza-fries">Pizza Fries</a>
+    <a href="#boti">Boti</a>
+    <a href="#barbeque">Barbeque</a>
+    <a href="#icecream">Ice Cream</a>
+    <a href="#soups">Soups</a>
+    <a href="#shakes">Shakes</a>
+    <a href="#kabab">Kabab</a>
+    <a href="#rolls">Rolls</a>
+    <a href="#beverages">Beverages</a>
+    <a href="#extras">Extras</a>
   </div>
+
+  <!-- DEALS first -->
+  <section id="deals">
+    <div class="section-header">
+      <div class="section-banner">DEALS</div>
+    </div>
+    <div class="deals-grid" id="dealsGrid"></div>
+  </section>
+
+  <!-- Burgers -->
+  <section id="burgers">
+    <div class="section-header">
+      <div class="section-banner">BURGERS</div>
+    </div>
+    <div class="grid" id="burgersGrid"></div>
+  </section>
+
+  <!-- Sandwiches -->
+  <section id="sandwiches">
+    <div class="section-header">
+      <div class="section-banner">SANDWICHES</div>
+    </div>
+    <div class="grid" id="sandwichesGrid"></div>
+  </section>
+
+  <!-- Broast -->
+  <section id="broast">
+    <div class="section-header">
+      <div class="section-banner">BROAST</div>
+    </div>
+    <div class="grid" id="broastGrid"></div>
+  </section>
+
+  <!-- Naan -->
+  <section id="naan">
+    <div class="section-header">
+      <div class="section-banner">NAAN</div>
+    </div>
+    <div class="grid" id="naanGrid"></div>
+  </section>
+
+  <!-- Fries -->
+  <section id="fries">
+    <div class="section-header">
+      <div class="section-banner">FRIES</div>
+    </div>
+    <div class="grid" id="friesGrid"></div>
+  </section>
+
+  <!-- Pizza Fries -->
+  <section id="pizza-fries">
+    <div class="section-header">
+      <div class="section-banner">PIZZA FRIES</div>
+    </div>
+    <div class="grid" id="pizzafrGrid"></div>
+  </section>
+
+  <!-- Boti -->
+  <section id="boti">
+    <div class="section-header">
+      <div class="section-banner">BOTI</div>
+    </div>
+    <div class="grid" id="botiGrid"></div>
+  </section>
+
+  <!-- Barbeque / Tikka -->
+  <section id="barbeque">
+    <div class="section-header">
+      <div class="section-banner">BARBEQUE / TIKKA</div>
+    </div>
+    <div class="grid" id="barbequeGrid"></div>
+  </section>
+
+  <!-- Ice Cream -->
+  <section id="icecream">
+    <div class="section-header">
+      <div class="section-banner">ICE CREAM</div>
+    </div>
+    <div class="grid" id="icecreamGrid"></div>
+  </section>
+
+  <!-- Soups -->
+  <section id="soups">
+    <div class="section-header">
+      <div class="section-banner">SOUPS</div>
+    </div>
+    <div class="grid" id="soupsGrid"></div>
+  </section>
+
+  <!-- Shakes -->
+  <section id="shakes">
+    <div class="section-header">
+      <div class="section-banner">SHAKES</div>
+    </div>
+    <div class="grid" id="shakesGrid"></div>
+  </section>
+
+  <!-- Kabab -->
+  <section id="kabab">
+    <div class="section-header">
+      <div class="section-banner">KABAB</div>
+    </div>
+    <div class="grid" id="kababGrid"></div>
+  </section>
+
+  <!-- Rolls -->
+  <section id="rolls">
+    <div class="section-header">
+      <div class="section-banner">ROLLS</div>
+    </div>
+    <div class="grid" id="rollsGrid"></div>
+  </section>
+
+  <!-- Beverages -->
+  <section id="beverages">
+    <div class="section-header">
+      <div class="section-banner">BEVERAGES</div>
+    </div>
+    <div class="grid" id="beveragesGrid"></div>
+  </section>
+
+  <!-- Extras -->
+  <section id="extras">
+    <div class="section-header">
+      <div class="section-banner">EXTRAS</div>
+    </div>
+    <div class="grid" id="extrasGrid"></div>
+  </section>
 </div>
 
-<main>
-  <!-- DEALS first -->
-  <section id="dealsSection" class="anchor">
-    <div class="section-title">
-      <h2>Deals</h2>
-      <div class="section-banner"></div>
-    </div>
-    <div class="deals-list" id="dealsList"></div>
-  </section>
-
-  <!-- Menu sections -->
-  <section id="menuContent">
-    <!-- Filled by JS -->
-  </section>
-</main>
-
-<!-- floating cart -->
+<!-- cart bar -->
 <div class="cart-bar" id="cartBar" onclick="openCheckout()">
-  🛒 Cart: <span id="cartCount">0</span> items — <span id="cartTotal">Rs. 0</span>
+  Cart: <span id="cartCount">0</span> items - <span id="cartTotal">Rs. 0</span>
 </div>
 
 <!-- checkout panel -->
-<div class="checkout-panel" id="checkoutPanel" aria-hidden="true">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+<div class="checkout-panel" id="checkoutPanel">
+  <div style="display:flex;justify-content:space-between;align-items:center">
     <h3 style="color:var(--accent)">Your Order</h3>
-    <button onclick="closeCheckout()" class="qty-btn" style="background:var(--accent);padding:8px 10px;">Close</button>
+    <button class="btn" onclick="closeCheckout()">Close</button>
   </div>
-  <div id="checkoutList"></div>
-  <div style="margin-top:10px">
-    <div class="grand" id="grandTotal">Total: Rs. 0</div>
-    <button class="order-btn" onclick="sendOrder()">Order on WhatsApp</button>
+  <div id="checkoutList" style="margin-top:12px"></div>
+  <div class="grand" id="grandTotal">Total: Rs. 0</div>
+  <div style="text-align:center;margin-top:12px">
+    <button class="btn" onclick="sendOrder()">Order on WhatsApp</button>
   </div>
 </div>
 
-<!-- modal for options -->
-<div class="modal" id="optModal">
-  <div class="modal-card" id="optCard">
+<!-- options modal -->
+<div id="optionsModal" style="display:none" class="modal">
+  <div class="modal-box" id="modalBox">
     <div style="display:flex;justify-content:space-between;align-items:center">
-      <h3 id="optTitle">Options</h3>
-      <button onclick="closeOpt()" class="qty-btn" style="background:#ccc;color:#000">X</button>
+      <h3 id="modalTitle">Options</h3>
+      <button class="btn" onclick="closeOptions()">Close</button>
     </div>
-    <p class="small-muted" id="optDesc">Choose options</p>
-    <div id="optFields"></div>
-    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
-      <button class="qty-btn" onclick="closeOpt()">Cancel</button>
-      <button class="buy-btn" onclick="confirmOpt()">Add to Cart</button>
+    <div id="optionsArea" style="margin-top:10px"></div>
+    <div style="display:flex;gap:8px;justify-content:center;margin-top:12px">
+      <button class="btn" onclick="confirmOptions()">Add to Cart</button>
     </div>
   </div>
 </div>
 
-<footer>
-  © 2025 Abdul Hadi Fast Food — Demo
-</footer>
+<footer style="text-align:center;padding:18px;color:var(--muted);margin-top:18px">© 2025 Abdul Hadi Fast Food</footer>
 
 <script>
-/* --- CONFIG --- */
-const PHONE_NUMBER = '923155377135'; // <-- change to your WhatsApp number without + or 00
-/* --- DATA --- */
-/* We'll include the full menu items and deals as you provided.
-   Each item may include 'options' array or null.
-   Option object: {name:'With Cheese', delta:50, key:'cheese'} - delta added to base price
-*/
+/* ============================
+   Data — menu & options
+   ============================ */
+const PHONE = '92' + '3158377135'; // change if needed
+
 const deals = [
- {id:'deal1',title:'Deal 1 — Buy 4 zinger get 1 free',price:1000,items:['4 x Zinger Burger','+1 Free Zinger']},
- {id:'deal2',title:'Deal 2 — 2 zinger + 1 Next Cola (245ml)',price:550,items:['2 x Zinger Burger','1 x Next Cola 245ml']},
- {id:'deal3',title:'Deal 3 — 1 zinger, 1 club sandwich, 1 Next Cola (1L)',price:600,items:['1 x Zinger Burger','1 x Club Sandwich','1 x Next Cola 1L']},
- {id:'deal4',title:'Deal 4 — 2 zinger + free fries',price:500,items:['2 x Zinger Burger','Free Fries']},
- {id:'deal5',title:'Deal 5 — 1 zinger,1 club sandwich,2 ice cream',price:750,items:['1 x Zinger Burger','1 x Club Sandwich','2 x Ice Cream (Single)']},
- {id:'deal6',title:'Deal 6 — 3 zinger + 1 Next Cola (1L)',price:850,items:['3 x Zinger Burger','1 x Next Cola 1L']},
- {id:'deal7',title:'Deal 7 — 1 QTR broast (leg), 1 club sandwich, 1 zinger',price:800,items:['1 x Qtr Broast (Leg)','1 x Club Sandwich','1 x Zinger Burger']},
- {id:'deal8',title:'Deal 8 — 2 zinger,1 club sandwich,1 chicken roll',price:850,items:['2 x Zinger Burger','1 x Club Sandwich','1 x Chicken Roll']},
- {id:'family',title:'Family Deal',price:'Contact',items:['2 Zinger Burger','2 Chicken Burger','1 Club Sandwich','2 Zinger Roll','1 Next Cola 1L']}
+  {id:'deal1', title:'Deal 1 — Buy 4 zinger get 1 free', price:1000, img:'images/deal_1.jpg'},
+  {id:'deal2', title:'Deal 2 — 2 zinger + Next Cola 245ml', price:550, img:'images/deal_2.jpg'},
+  {id:'deal3', title:'Deal 3 — 1 zinger + 1 club + Next Cola 1L', price:600, img:'images/deal_3.jpg'},
+  {id:'deal4', title:'Deal 4 — 2 zinger + free fries', price:500, img:'images/deal_4.jpg'},
+  {id:'deal5', title:'Deal 5 — 1 zinger + 1 club + 2 ice cream', price:750, img:'images/deal_5.jpg'},
+  {id:'deal6', title:'Deal 6 — 3 zinger + Next Cola 1L', price:850, img:'images/deal_6.jpg'},
+  {id:'deal7', title:'Deal 7 — 1 QTR broast (leg) + 1 club + 1 zinger', price:800, img:'images/deal_7.jpg'},
+  {id:'deal8', title:'Deal 8 — 2 zinger + 1 club + 1 chicken roll', price:850, img:'images/deal_8.jpg'},
+  {id:'family', title:'Family Deal — 2 zinger,2 chicken burger,1 club,2 zinger roll,1 next cola 1L', price:1500, img:'images/family_deal.jpg'}
 ];
 
-/* menu categorized */
-const menuSections = [
- {id:'burgers',title:'Burgers',items:[
-   {id:'zinger_burger',name:'Zinger Burger',price:250,img:'zinger_burger.jpg',options:[
-     {name:'With Cheese',key:'cheese',delta:50},
-     {name:'Without Cheese',key:'no_cheese',delta:0}
-   ]},
-   {id:'mini_burger',name:'Mini Burger',price:200,img:'mini_burger.jpg',options:[
-     {name:'With Cheese',key:'cheese',delta:50},
-     {name:'Without Cheese',key:'no_cheese',delta:0}
-   ]},
-   {id:'jumbo_zinger',name:'Jumbo Zinger',price:450,img:'jumbo_zinger.jpg',options:[
-     {name:'With Cheese',key:'cheese',delta:50},
-     {name:'Without Cheese',key:'no_cheese',delta:0}
-   ]},
-   {id:'jumbo_zinger_cheese',name:'Jumbo Zinger Cheese',price:500,img:'jumbo_zinger_cheese.jpg',options:null},
-   {id:'chicken_burger',name:'Chicken Burger',price:250,img:'chicken_burger.jpg',options:[
-     {name:'With Cheese',key:'cheese',delta:50},
-     {name:'Without Cheese',key:'no_cheese',delta:0}
-   ]},
-   {id:'chicken_cheese_burger',name:'Chicken Cheese Burger',price:300,img:'chicken_cheese_burger.jpg',options:null},
-   {id:'chicken_jumbo',name:'Chicken Jumbo Burger',price:450,img:'chicken_jumbo.jpg',options:[
-     {name:'With Cheese',key:'cheese',delta:50},
-     {name:'Without Cheese',key:'no_cheese',delta:0}
-   ]},
-   {id:'beef_burger',name:'Beef Burger',price:300,img:'beef_burger.jpg',options:[
-     {name:'With Cheese',key:'cheese',delta:50},
-     {name:'Without Cheese',key:'no_cheese',delta:0}
-   ]},
-   {id:'beef_cheese_burger',name:'Beef Cheese Burger',price:350,img:'beef_cheese_burger.jpg',options:null},
-   {id:'beef_jumbo',name:'Beef Jumbo Burger',price:450,img:'beef_jumbo.jpg',options:null},
-   {id:'two_in_one',name:'Two in One Burger',price:500,img:'two_in_one.jpg',options:null}
- ]},
- {id:'sandwiches',title:'Sandwiches',items:[
-   {id:'chicken_sandwich',name:'Chicken Sandwich',price:200,img:'chicken_sandwich.jpg',options:[
-     {name:'With Cheese +50',key:'cheese',delta:50},
-     {name:'No Cheese',key:'no_cheese',delta:0}
-   ]},
-   {id:'chicken_cheese_sandwich',name:'Chicken Cheese Sandwich',price:250,img:'chicken_cheese_sandwich.jpg',options:null},
-   {id:'club_sandwich',name:'Club Sandwich',price:250,img:'club_sandwich.jpg',options:[
-     {name:'With Cheese +50',key:'cheese',delta:50},
-     {name:'No Cheese',key:'no_cheese',delta:0}
-   ]},
-   {id:'club_cheese',name:'Club Cheese Sandwich',price:300,img:'club_cheese.jpg',options:null},
-   {id:'crispy_sandwich',name:'Crispy Sandwich',price:300,img:'crispy_sandwich.jpg',options:[
-     {name:'With Cheese +50',key:'cheese',delta:50},
-     {name:'No Cheese',key:'no_cheese',delta:0}
-   ]},
-   {id:'crispy_cheese',name:'Crispy Cheese Sandwich',price:350,img:'crispy_cheese.jpg',options:null},
-   {id:'bbq_sandwich',name:'BBQ Sandwich',price:350,img:'bbq_sandwich.jpg',options:null},
-   {id:'bbq_club',name:'BBQ Club Sandwich',price:400,img:'bbq_club.jpg',options:null},
-   {id:'malai_sandwich',name:'Malai Sandwich',price:400,img:'malai_sandwich.jpg',options:null},
-   {id:'malai_club',name:'Malai Club Sandwich',price:450,img:'malai_club.jpg',options:null},
-   {id:'malai_cheese',name:'Malai Cheese Sandwich',price:450,img:'malai_cheese.jpg',options:null}
- ]},
- {id:'broast',title:'Broast',items:[
-   {id:'qtr_broast_chest',name:'Qtr Broast (Chest)',price:400,img:'qtr_broast_chest.jpg',options:[
-     {name:'Quarter',key:'qtr',delta:0},
-     {name:'Full(+?)',key:'full',delta:0} // we won't use full for quarter per rules, but kept
-   ]},
-   {id:'qtr_broast_leg',name:'Qtr Broast (Leg)',price:350,img:'qtr_broast_leg.jpg',options:[
-     {name:'Leg',key:'leg',delta:0},
-     {name:'Chest(+50)',key:'chest',delta:50}
-   ]},
-   {id:'crispy_broast_chest',name:'Crispy Broast (Chest)',price:400,img:'crispy_broast_chest.jpg',options:[
-     {name:'Chest(+50)',key:'chest',delta:50},
-     {name:'Leg',key:'leg',delta:0}
-   ]},
-   {id:'crispy_broast_leg',name:'Crispy Broast (Leg)',price:400,img:'crispy_broast_leg.jpg',options:[
-     {name:'Leg',key:'leg',delta:0},
-     {name:'Chest(+50)',key:'chest',delta:50}
-   ]},
-   {id:'spicy_broast',name:'Spicy Broast',price:500,img:'spicy_broast.jpg',options:null}
- ]},
- {id:'naan',title:'Naan',items:[
-   {id:'chapati',name:'Chapati',price:20,img:'chapati.jpg',options:null},
-   {id:'puri_small',name:'Puri Paratha Small',price:50,img:'puri_small.jpg',options:null},
-   {id:'puri_large',name:'Puri Paratha',price:80,img:'puri_large.jpg',options:null}
- ]},
- {id:'fries',title:'Fries',items:[
-   {id:'plain_fries',name:'Plain Fries',price:50,img:'plain_fries.jpg',options:[
-     {name:'Small',key:'small',delta:0},
-     {name:'Large(+50)',key:'large',delta:50}
-   ]},
-   {id:'masala_fries',name:'Masala Fries',price:100,img:'masala_fries.jpg',options:null},
-   {id:'mayo_fries',name:'Mayo Fries',price:150,img:'mayo_fries.jpg',options:null},
-   {id:'mayo_garlic_fries',name:'Mayo Garlic Fries',price:200,img:'mayo_garlic_fries.jpg',options:null}
- ]},
- {id:'pizza_fries',title:'Pizza Fries',items:[
-   {id:'pizza_fries_medium',name:'Pizza Fries',price:300,img:'pizza_fries.jpg',options:[
-     {name:'Medium',key:'medium',delta:0},
-     {name:'Large(+100)',key:'large',delta:100}
-   ]},
-   {id:'matkka_fries',name:'Matkka Fries',price:200,img:'matkka_fries.jpg',options:[
-     {name:'Medium',key:'medium',delta:0},
-     {name:'Large(+250)',key:'large',delta:250}
-   ]},
-   {id:'chicken_fries',name:'Chicken Fries',price:250,img:'chicken_fries.jpg',options:[
-     {name:'Medium',key:'medium',delta:0},
-     {name:'Large(+100)',key:'large',delta:100}
-   ]}
- ]},
- {id:'boti',title:'Boti',items:[
-   {id:'chicken_boti',name:'Chicken Boti',price:350,img:'chicken_boti.jpg',options:[
-     {name:'Chicken',key:'chicken',delta:0},
-     {name:'Beef',key:'beef',delta:100} // per later rules Bihari opt beef
-   ]},
-   {id:'chicken_bihari_boti',name:'Chicken Bihari Boti',price:400,img:'chicken_bihari_boti.jpg',options:[
-     {name:'Chicken',key:'chicken',delta:0},
-     {name:'Beef',key:'beef',delta:100}
-   ]},
-   {id:'malai_boti',name:'Malai Boti',price:400,img:'malai_boti.jpg',options:null},
-   {id:'beef_boti',name:'Beef Boti',price:450,img:'beef_boti.jpg',options:null},
-   {id:'beef_bihari_boti',name:'Beef Bihari Boti',price:500,img:'beef_bihari_boti.jpg',options:null}
- ]},
- {id:'barbeque',title:'Barbeque / Tikka',items:[
-   {id:'chicken_tikka_chest',name:'Chicken Tikka (Chest)',price:400,img:'chicken_tikka_chest.jpg',options:[
-     {name:'Chest(+50)',key:'chest',delta:50},
-     {name:'Leg',key:'leg',delta:0}
-   ]},
-   {id:'chicken_tikka_leg',name:'Chicken Tikka (Leg)',price:350,img:'chicken_tikka_leg.jpg',options:[
-     {name:'Leg',key:'leg',delta:0},
-     {name:'Chest(+50)',key:'chest',delta:50}
-   ]},
-   {id:'malai_tikka_chest',name:'Malai Tikka (Chest)',price:450,img:'malai_tikka.jpg',options:null},
-   {id:'bihari_tikka',name:'Bihari Tikka (Chest)',price:450,img:'bihari_tikka.jpg',options:null},
-   {id:'green_tikka',name:'Green Tikka (Chest)',price:450,img:'green_tikka.jpg',options:null}
- ]},
- {id:'ice_cream',title:'Ice Cream',items:[
-   {id:'single_scope',name:'Single Scoop',price:100,img:'single_scope.jpg',options:null},
-   {id:'double_scope',name:'Double Scoop',price:180,img:'double_scope.jpg',options:null},
-   {id:'ah_special',name:'A.H Special Falooda',price:350,img:'ah_falooda.jpg',options:null}
- ]},
- {id:'soups',title:'Soups',items:[
-   {id:'hot_sour',name:'Hot & Sour Soup',price:180,img:'hot_sour.jpg',options:null},
-   {id:'corn_soup',name:'Corn Soup',price:150,img:'corn_soup.jpg',options:null},
-   {id:'veg_soup',name:'Vegetable Soup',price:130,img:'veg_soup.jpg',options:null}
- ]},
- {id:'shakes',title:'Shakes',items:[
-   {id:'kitkat_shake',name:'Kitkat Shake',price:300,img:'kitkat_shake.jpg',options:null},
-   {id:'oreo_shake',name:'Oreo Shake',price:250,img:'oreo_shake.jpg',options:null},
-   {id:'strawberry_shake',name:'Strawberry Shake',price:250,img:'strawberry_shake.jpg',options:null},
-   /* and others */
- ]},
- {id:'kabab',title:'Kabab',items:[
-   {id:'reshmy_kabab',name:'Reshmy Kabab',price:400,img:'reshmy_kabab.jpg',options:null},
-   {id:'gola_kabab',name:'Gola Kabab',price:400,img:'gola_kabab.jpg',options:null},
-   {id:'dhaga_kabab',name:'Dhaga Kabab',price:500,img:'dhaga_kabab.jpg',options:null},
-   {id:'turkish_kabab',name:'Turkish Kabab',price:500,img:'turkish_kabab.jpg',options:null},
-   {id:'sekh_kabab',name:'Sekh Kabab',price:400,img:'sekh_kabab.jpg',options:null},
-   {id:'chandan_kabab',name:'Chandan Kabab',price:500,img:'chandan_kabab.jpg',options:null}
- ]},
- {id:'rolls',title:'Rolls',items:[
-   {id:'chicken_roll',name:'Chicken Roll',price:160,img:'chicken_roll.jpg',options:[
-     {name:'Cheese (+50)',key:'cheese',delta:50},
-     {name:'No Cheese',key:'no_cheese',delta:0}
-   ]},
-   {id:'chicken_cheese_roll',name:'Chicken Cheese Roll',price:200,img:'chicken_cheese_roll.jpg',options:null},
-   {id:'chicken_mayo_roll',name:'Chicken Mayo Roll',price:250,img:'chicken_mayo_roll.jpg',options:null},
-   {id:'chicken_kabab_roll',name:'Chicken Kabab Roll',price:160,img:'chicken_kabab_roll.jpg',options:null},
-   {id:'beef_roll',name:'Beef Roll',price:200,img:'beef_roll.jpg',options:[
-     {name:'Mayo +50',key:'mayo',delta:50},
-     {name:'No Mayo',key:'no_mayo',delta:0}
-   ]},
-   {id:'beef_mayo_roll',name:'Beef Mayo Roll',price:250,img:'beef_mayo_roll.jpg',options:null},
-   {id:'zinger_roll',name:'Zinger Roll',price:180,img:'zinger_roll.jpg',options:[
-     {name:'With Cheese +50',key:'cheese',delta:50},
-     {name:'No Cheese',key:'no_cheese',delta:0}
-   ]},
-   {id:'shawarma_roll',name:'Shawarma Roll',price:250,img:'shawarma_roll.jpg',options:null}
- ]},
- {id:'beverages',title:'Beverages',items:[
-   {id:'cold_300',name:'Cold Drink 300ml',price:70,img:'cold_300.jpg',options:null},
-   {id:'cold_500',name:'Cold Drink 500ml',price:100,img:'cold_500.jpg',options:null},
-   {id:'cold_1',name:'Cold Drink 1 Litre',price:150,img:'cold_1.jpg',options:null},
-   {id:'next_300',name:'Next 300ml',price:90,img:'next_300.jpg',options:null},
- ]},
- {id:'extras',title:'Extras',items:[
-   {id:'mayo_dip',name:'Mayo Sauce Dip',price:80,img:'mayo_dip.jpg',options:null},
-   {id:'ketchup_dip',name:'Ketchup Dip',price:80,img:'ketchup_dip.jpg',options:null},
-   {id:'raita',name:'Raita',price:80,img:'raita.jpg',options:null},
-   {id:'cheese_extra',name:'Cheese',price:50,img:'cheese_extra.jpg',options:null},
-   {id:'coleslaw',name:'Coleslaw',price:80,img:'coleslaw.jpg',options:null}
- ]}
+// utility to create an ID for item variant in cart
+function variantId(baseId, opts){ return baseId + '|' + Object.values(opts).join('|'); }
+
+// items (kept same as you sent; image names same)
+const items = [
+  {id:'zinger', name:'Zinger Burger', price:250, img:'images/zinger_burger.jpg', category:'burgers',
+    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}, size:{type:'select',label:'Size',values:{regular:0,large:100}}}},
+  {id:'zinger_mini', name:'Mini Burger', price:200, img:'images/mini_burger.jpg', category:'burgers',
+    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
+  {id:'jumbo_zinger', name:'Jumbo Zinger', price:450, img:'images/jumbo_zinger.jpg', category:'burgers',
+    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}, size:{type:'select',label:'Size',values:{regular:0,large:100}}}},
+  {id:'chicken_burger', name:'Chicken Burger', price:250, img:'images/chicken_burger.jpg', category:'burgers',
+    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}, size:{type:'select',label:'Size',values:{regular:0,large:100}}}},
+  {id:'beef_burger', name:'Beef Burger', price:300, img:'images/beef_burger.jpg', category:'burgers',
+    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}, size:{type:'select',label:'Size',values:{regular:0,large:100}}}},
+  {id:'tow_in_one', name:'Tow in One Burger', price:500, img:'images/cheese_burger.jpg', category:'burgers'},
+
+  {id:'chicken_sandwich', name:'Chicken Sandwich', price:200, img:'images/chicken_sandwich.jpg', category:'sandwiches',
+    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
+  {id:'club_sandwich', name:'Club Sandwich', price:250, img:'images/club_sandwich.jpg', category:'sandwiches',
+    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
+  {id:'crispy_sandwich', name:'Crispy Sandwich', price:300, img:'images/crispy_sandwich.jpg', category:'sandwiches',
+    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
+  {id:'bbq_sandwich', name:'BBQ Sandwich', price:350, img:'images/bbq_sandwich.jpg', category:'sandwiches'},
+  {id:'malai_sandwich', name:'Malai Sandwich', price:400, img:'images/malai_sandwich.jpg', category:'sandwiches'},
+
+  {id:'qtr_chest', name:'Qtr Broast (Chest)', price:400, img:'images/qtr_broast_chest.jpg', category:'broast', options:{part:{type:'select',label:'Part',values:{chest:50,leg:0}}}},
+  {id:'qtr_leg', name:'Qtr Broast (Leg)', price:350, img:'images/qtr_broast_leg.jpg', category:'broast', options:{part:{type:'select',label:'Part',values:{chest:50,leg:0}}}},
+  {id:'crispy_broast', name:'Crispy Broast (Chest)', price:400, img:'images/crispy_broast.jpg', category:'broast', options:{part:{type:'select',label:'Part',values:{chest:50,leg:0}}}},
+  {id:'spicy_broast', name:'Spicy Broast', price:500, img:'images/spicy_broast.jpg', category:'broast'},
+
+  {id:'chapati', name:'Chapati', price:20, img:'images/logo.png', category:'naan'},
+  {id:'puri_small', name:'Puri Paratha Small', price:50, img:'images/logo.png', category:'naan'},
+  {id:'puri', name:'Puri Paratha', price:80, img:'images/logo.png', category:'naan'},
+
+  {id:'plain_fries', name:'Plain Fries', price:50, img:'images/plain_fries.jpg', category:'fries'},
+  {id:'masala_fries', name:'Masala Fries', price:100, img:'images/masala_fries.jpg', category:'fries'},
+  {id:'mayo_fries', name:'Mayo Fries', price:150, img:'images/mayo_fries.jpg', category:'fries'},
+  {id:'mayo_garlic_fries', name:'Mayo Garlic Fries', price:200, img:'images/mayo_garlic_fries.jpg', category:'fries'},
+
+  {id:'pizza_fries', name:'Pizza Fries', price:300, img:'images/pizza_fries_med.jpg', category:'pizza-fries', options:{size:{type:'select',label:'Size',values:{medium:0,large:100}}}},
+  {id:'matkka_fries', name:'Matkka Fries', price:200, img:'images/matka_fries_med.jpg', category:'pizza-fries', options:{size:{type:'select',label:'Size',values:{medium:0,large:250}}}},
+  {id:'chicken_fries', name:'Chicken Fries', price:250, img:'images/chicken_fries_med.jpg', category:'pizza-fries', options:{size:{type:'select',label:'Size',values:{medium:0,large:100}}}},
+
+  {id:'chicken_boti', name:'Chicken Boti', price:350, img:'images/chicken_boti.jpg', category:'boti'},
+  {id:'beef_boti', name:'Beef Boti', price:450, img:'images/beef_boti.jpg', category:'boti'},
+  {id:'malai_boti', name:'Malai Boti', price:400, img:'images/malai_boti.jpg', category:'boti'},
+  {id:'bihari_boti', name:'Bihari Boti', price:400, img:'images/bihari_boti.jpg', category:'boti', options:{meat:{type:'select',label:'Meat',values:{chicken:0,beef:50}}}},
+
+  {id:'chicken_tikka', name:'Chicken Tikka', price:400, img:'images/chicken_tikka_chest.jpg', category:'barbeque', options:{part:{type:'select',label:'Part',values:{chest:50,leg:0}}}},
+  {id:'malai_tikka', name:'Malai Tikka', price:450, img:'images/malai_tikka.jpg', category:'barbeque'},
+  {id:'green_tikka', name:'Green Tikka', price:450, img:'images/green_tikka.jpg', category:'barbeque'},
+
+  {id:'single_scope', name:'Single Scoop', price:100, img:'images/single_scoop.jpg', category:'icecream', options:{size:{type:'select',label:'Scoop',values:{single:0,double:80}}}},
+
+  {id:'hot_sour_soup', name:'Hot & Sour Soup', price:180, img:'images/hot_sour_soup.jpg', category:'soups'},
+  {id:'corn_soup', name:'Corn Soup', price:150, img:'images/corn_soup.jpg', category:'soups'},
+  {id:'veg_soup', name:'Vegetable Soup', price:130, img:'images/veg_soup.jpg', category:'soups'},
+
+  {id:'kitkat_shake', name:'Kitkat Shake', price:300, img:'images/kitkat_shake.jpg', category:'shakes'},
+  {id:'oreo_shake', name:'Oreo Shake', price:250, img:'images/oreo_shake.jpg', category:'shakes'},
+  {id:'strawberry_shake', name:'Strawberry Shake', price:250, img:'images/strawberry_shake.jpg', category:'shakes'},
+
+  {id:'reshmy_kabab', name:'Reshmy Kabab', price:400, img:'images/reshmy_kabab.jpg', category:'kabab'},
+  {id:'gola_kabab', name:'Gola Kabab', price:400, img:'images/gola_kabab.jpg', category:'kabab'},
+
+  {id:'chicken_roll', name:'Chicken Roll', price:160, img:'images/chicken_roll.jpg', category:'rolls', options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
+  {id:'beef_roll', name:'Beef Roll', price:200, img:'images/beef_roll.jpg', category:'rolls'},
+  {id:'shawarma_roll', name:'Shawarma Roll', price:250, img:'images/shawarma_roll.jpg', category:'rolls'},
+
+  {id:'cold_drink_300', name:'Cold Drink 300ml', price:70, img:'images/cold_drink.jpg', category:'beverages'},
+  {id:'next_col_245', name:'Next Cola 245ml', price:90, img:'images/next_cola_245.jpg', category:'beverages'},
+  {id:'next_col_1l', name:'Next Cola 1 Litre', price:150, img:'images/next_cola_1l.jpg', category:'beverages'},
+
+  {id:'mayo_dip', name:'Mayo Sauce Dip', price:80, img:'images/mayo_dip.jpg', category:'extras'},
+  {id:'ketchup_dip', name:'Ketchup Dip', price:80, img:'images/ketchup_dip.jpg', category:'extras'}
 ];
 
-/* --- STATE --- */
-let cart = {}; // key -> {id,name,optsLabel,price,qty,img}
-let currentOptFor = null; // object {item,selectedOptions}
+// CART structure
+let cart = {};
 
-/* --- RENDER HELPERS --- */
+// Track deal UI qty toggles
+let dealUiState = {}; // e.g. {deal1: true/false}
 
-function createCategoryNav(){
-  const nav = document.getElementById('categoryNav');
-  // Add deals link
-  const dealsBtn = el('button',['cat-btn'], 'Deals');
-  dealsBtn.onclick = ()=> document.getElementById('dealsSection').scrollIntoView({behavior:'smooth'});
-  nav.appendChild(dealsBtn);
-  menuSections.forEach(sec=>{
-    const b = el('button',['cat-btn'], sec.title);
-    b.onclick = ()=> document.getElementById(sec.id).scrollIntoView({behavior:'smooth'});
-    nav.appendChild(b);
-  });
-}
-
+// Render functions
 function renderDeals(){
-  const list = document.getElementById('dealsList');
-  list.innerHTML = '';
+  const el = document.getElementById('dealsGrid'); el.innerHTML = '';
   deals.forEach(d=>{
-    const node = document.createElement('div');
-    node.className='deal-card';
-    node.innerHTML = `<div>
-      <div style="font-weight:900">${d.title}</div>
-      <div class="small-muted">${d.items.join(' • ')}</div>
-    </div>
-    <div style="text-align:right">
-      <div style="font-weight:900;color:var(--accent)">${d.price==='Contact'?d.price:'Rs. '+d.price}</div>
-      <div style="margin-top:8px"><button class="buy-btn" onclick="handleDealBuy('${d.id}')">Buy</button></div>
-    </div>`;
-    list.appendChild(node);
+    const node = document.createElement('div'); node.className='deal-card';
+    node.innerHTML = `
+      <img src="${d.img}" alt="${d.title}">
+      <div class="deal-info">
+        <div style="font-weight:900">${d.title}</div>
+        <div style="color:var(--accent);font-weight:900;margin-top:6px">Rs. ${d.price}</div>
+        <div style="display:flex;gap:8px;margin-top:10px" id="deal-controls-${d.id}">
+          <div class="qty-controls" id="deal-qty-${d.id}" style="display:none">
+            <button class="qty-btn" onclick="decreaseDeal('${d.id}', ${d.price})">−</button>
+            <div class="qty-num" id="deal-qty-num-${d.id}">0</div>
+            <button class="qty-btn" onclick="increaseDeal('${d.id}', ${d.price})">+</button>
+          </div>
+          <button class="btn deal-buy" id="deal-buy-${d.id}" onclick="handleDealBuy('${d.id}', ${d.price})">Buy</button>
+        </div>
+      </div>`;
+    el.appendChild(node);
+    // default ui state
+    dealUiState[d.id] = false;
   });
 }
 
-/* Build menu sections */
-function renderMenu(){
-  const container = document.getElementById('menuContent');
-  container.innerHTML = '';
-  menuSections.forEach(sec=>{
-    const secEl = document.createElement('section');
-    secEl.id = sec.id;
-    secEl.className = 'anchor';
-    secEl.innerHTML = `
-      <div class="section-title">
-        <h2>${sec.title}</h2>
-        <div class="section-banner"></div>
+function renderGrid(category, containerId){
+  const container = document.getElementById(containerId); container.innerHTML = '';
+  items.filter(i => i.category===category).forEach(it=>{
+    const card = document.createElement('div'); card.className='card';
+    card.innerHTML = `<img src="${it.img}" alt="${it.name}"><div class="name">${it.name}</div><div class="price">Rs. ${it.price}</div>
+      <div class="controls" id="controls-${it.id}"></div>`;
+    container.appendChild(card);
+    const ctrl = card.querySelector(`#controls-${it.id}`);
+    ctrl.innerHTML = `<div class="qty-controls" id="qty-controls-${it.id}" style="display:none">
+        <button class="qty-btn" onclick="decreaseFromVariant('${it.id}')">−</button>
+        <div class="qty-num" id="qty-num-${it.id}">0</div>
+        <button class="qty-btn" onclick="increaseFromVariant('${it.id}')">+</button>
       </div>
-      <div class="section-sub">Tap a category at top to jump</div>
-    `;
-    const grid = document.createElement('div');
-    grid.className = 'grid';
-    sec.items.forEach(it=>{
-      const card = document.createElement('div');
-      card.className='card';
-      const imgSrc = `images/${it.img}`;
-      card.innerHTML = `
-        <img src="${imgSrc}" alt="${it.name}" onerror="this.style.opacity='.3'">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div style="text-align:left">
-            <div class="title">${it.name}</div>
-            <div class="muted">${it.options ? 'Has options' : ''}</div>
-          </div>
-          <div style="text-align:right">
-            <div class="price">Rs. ${it.price}</div>
-          </div>
-        </div>
-        <div class="controls" style="margin-top:6px">
-          <div id="qtywrap-${it.id}"><!-- replaced by JS --></div>
-          <button class="buy-btn" onclick="onBuyClick('${it.id}')">Buy</button>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-    secEl.appendChild(grid);
-    container.appendChild(secEl);
+      <button class="btn buy-btn" id="buy-${it.id}" onclick="handleBuy('${it.id}')">Buy</button>`;
   });
 }
 
-/* small helper to create element quickly */
-function el(tag,cls,txt){ const e=document.createElement(tag); if(cls) e.className = cls.join(' '); if(txt) e.innerText = txt; return e; }
+// initial render
+renderDeals();
+renderGrid('burgers','burgersGrid');
+renderGrid('sandwiches','sandwichesGrid');
+renderGrid('broast','broastGrid');
+renderGrid('naan','naanGrid');
+renderGrid('fries','friesGrid');
+renderGrid('pizza-fries','pizzafrGrid');
+renderGrid('boti','botiGrid');
+renderGrid('barbeque','barbequeGrid');
+renderGrid('icecream','icecreamGrid');
+renderGrid('soups','soupsGrid');
+renderGrid('shakes','shakesGrid');
+renderGrid('kabab','kababGrid');
+renderGrid('rolls','rollsGrid');
+renderGrid('beverages','beveragesGrid');
+renderGrid('extras','extrasGrid');
 
-/* initialize qty UI for items (all zero) */
-function initQtyUI(){
-  menuSections.forEach(sec=>{
-    sec.items.forEach(it=>{
-      const wrap = document.getElementById(`qtywrap-${it.id}`);
-      wrap.innerHTML = `
-        <div class="qty-controls" id="controls-${it.id}" style="display:inline-flex">
-          <button class="qty-btn" onclick="changeQty('${it.id}',-1)">−</button>
-          <div id="qty-${it.id}">0</div>
-          <button class="qty-btn" onclick="changeQty('${it.id}',1)">+</button>
-        </div>
-      `;
-      // Initially hide qty controls; show only when user buys or if previously in cart
-      document.getElementById(`controls-${it.id}`).style.display = 'none';
-    });
-  });
-}
-
-/* FIND ITEM BY ID */
-function findItem(id){
-  for(const s of menuSections){
-    for(const it of s.items) if(it.id===id) return it;
+/* Options modal logic (unchanged design) */
+let currentPicking = null;
+function openOptions(id, type='item', basePrice){
+  let base = null;
+  if(type==='deal'){
+    base = deals.find(d=>d.id===id);
+    currentPicking = {type:'deal', id:id, base:base, price:base.price};
+  } else {
+    base = items.find(i=>i.id===id);
+    currentPicking = {type:'item', id:id, base:base, price:base.price};
   }
-  return null;
+  const modal = document.getElementById('optionsModal');
+  const optsArea = document.getElementById('optionsArea');
+  const title = document.getElementById('modalTitle');
+  optsArea.innerHTML = ''; title.innerText = (base ? base.name : 'Deal');
+  if(currentPicking.type==='deal'){
+    optsArea.innerHTML = `<div style="padding:12px;text-align:center">This is a deal. Click Add to cart.</div>`;
+    modal.style.display='flex';
+    return;
+  }
+  const opts = base.options || null;
+  if(!opts){
+    optsArea.innerHTML = `<div style="padding:12px;text-align:center">No options for this item. Click Add to cart to add one unit.</div>`;
+    modal.style.display='flex';
+    return;
+  }
+  for(const [key,opt] of Object.entries(opts)){
+    if(opt.type==='boolean'){
+      const idEl = `opt_${key}`;
+      const row = document.createElement('div'); row.className='option-row';
+      row.innerHTML = `<div class="option-label">${opt.label}</div>
+        <div><button class="option-choice" id="${idEl}" data-key="${key}" data-type="boolean">No</button></div>`;
+      optsArea.appendChild(row);
+      setTimeout(()=>{document.getElementById(idEl).onclick = ()=>{
+        const el = document.getElementById(idEl);
+        if(el.innerText==='No'){ el.innerText='Yes'; el.dataset.selected='1'; el.style.backgroundColor='#f0f0f0';}
+        else {el.innerText='No'; el.dataset.selected='0'; el.style.backgroundColor='';}
+      }},100);
+    } else if(opt.type==='select'){
+      const row = document.createElement('div'); row.className='option-row';
+      row.innerHTML = `<div class="option-label">${opt.label}</div><div id="select-${key}" style="display:flex;gap:6px"></div>`;
+      optsArea.appendChild(row);
+      const selDivId = `select-${key}`;
+      for(const [valName,valPrice] of Object.entries(opt.values)){
+        const btn = document.createElement('button'); btn.className='option-choice';
+        btn.innerText = `${capitalize(valName)} ${valPrice ? '+'+valPrice : ''}`;
+        btn.onclick = ()=> {
+          const children = document.getElementById(selDivId).querySelectorAll('.option-choice');
+          children.forEach(c=>c.style.border='1px solid #eee');
+          btn.style.border='2px solid var(--accent)';
+          btn.dataset.selected = valName;
+        };
+        document.getElementById(selDivId).appendChild(btn);
+      }
+    }
+  }
+  modal.style.display='flex';
+}
+function closeOptions(){ document.getElementById('optionsModal').style.display='none'; currentPicking=null; document.getElementById('optionsArea').innerHTML=''; }
+function capitalize(s){ if(!s) return s; return s.charAt(0).toUpperCase()+s.slice(1); }
+
+/* Add to cart logic */
+function confirmOptions(){
+  if(!currentPicking) return;
+  if(currentPicking.type==='deal'){
+    const id = variantId(currentPicking.id, {deal:'1'});
+    if(!cart[id]) cart[id] = {variantId:id, baseId:currentPicking.id, name:currentPicking.base.title, price:currentPicking.price, qty:0, img:currentPicking.base.img, opts:{}};
+    cart[id].qty += 1;
+    updateCartDisplay();
+    closeOptions();
+    // enable deal qty controls in UI
+    toggleDealQtyControls(currentPicking.id, true);
+    return;
+  }
+  const base = currentPicking.base;
+  const optsDef = base.options || {};
+  const selected = {};
+  for(const [k,v] of Object.entries(optsDef)){
+    if(v.type==='boolean'){
+      const el = document.getElementById(`opt_${k}`);
+      selected[k] = (el && el.dataset.selected==='1') ? 'yes':'no';
+    } else if(v.type==='select'){
+      const selRoot = document.getElementById(`select-${k}`);
+      let chosen = null;
+      if(selRoot){
+        const buttons = selRoot.querySelectorAll('.option-choice');
+        buttons.forEach(b=>{ if(b.dataset.selected) chosen = b.dataset.selected; });
+      }
+      selected[k] = chosen || Object.keys(v.values)[0];
+    }
+  }
+  let optPrice = 0;
+  for(const [k,v] of Object.entries(optsDef)){
+    if(v.type==='boolean'){ if(selected[k]==='yes') optPrice += v.price || 0; }
+    else if(v.type==='select'){ const val = selected[k]; const valPrice = (v.values && v.values[val]) ? v.values[val] : 0; optPrice += valPrice; }
+  }
+  const totalPrice = base.price + optPrice;
+  const varId = variantId(base.id, selected);
+  const varNameParts = [base.name];
+  for(const [k,v] of Object.entries(selected)){
+    if(v && v!=='no' && v!=='regular' && v!=='medium') varNameParts.push(capitalize(k)+':'+capitalize(String(v)));
+    if(v==='yes') varNameParts.push(k==='cheese' ? 'With Cheese' : capitalize(k));
+    if(v==='large') varNameParts.push('(Large)');
+  }
+  const varName = varNameParts.join(' ');
+  if(!cart[varId]) cart[varId] = {variantId:varId, baseId:base.id, name:varName, price:totalPrice, qty:0, img:base.img, opts:selected};
+  cart[varId].qty += 1;
+  updateCartDisplay();
+  closeOptions();
 }
 
-/* Buy click: open options modal if options exist; else treat as simple item */
-function onBuyClick(id){
-  const it = findItem(id);
-  if(!it) return alert('Item not found');
-  if(it.options && it.options.length>0){
-    openOptModal(it);
-  }else{
-    // toggle qty UI visible and increment one
-    const controls = document.getElementById(`controls-${id}`);
-    controls.style.display = 'inline-flex';
-    changeQty(id,1);
+/* Items without options quick handlers */
+function handleBuy(baseId){
+  const base = items.find(i=>i.id===baseId);
+  if(!base) return;
+  if(base.options) { openOptions(baseId,'item'); return; }
+  const varId = variantId(baseId, {});
+  if(!cart[varId]) cart[varId] = {variantId:varId, baseId:baseId, name:base.name, price:base.price, qty:0, img:base.img, opts:{}};
+  cart[varId].qty += 1;
+  toggleQtyControls(baseId, true);
+  updateCartDisplay();
+}
+function increaseFromVariant(baseId){
+  const vid = Object.keys(cart).find(k=>cart[k].baseId===baseId && Object.keys(cart[k].opts || {}).length===0);
+  if(vid){ cart[vid].qty += 1; updateCartDisplay(); toggleQtyControls(baseId,true); return; }
+  handleBuy(baseId);
+}
+function decreaseFromVariant(baseId){
+  const vid = Object.keys(cart).find(k=>cart[k].baseId===baseId && Object.keys(cart[k].opts || {}).length===0);
+  if(!vid) return;
+  cart[vid].qty = Math.max(0, cart[vid].qty - 1);
+  if(cart[vid].qty===0) delete cart[vid];
+  updateCartDisplay();
+  const exists = Object.keys(cart).some(k=>cart[k].baseId===baseId);
+  toggleQtyControls(baseId, exists);
+}
+function toggleQtyControls(baseId, show){
+  const qc = document.getElementById(`qty-controls-${baseId}`);
+  const buyBtn = document.getElementById(`buy-${baseId}`);
+  if(qc) qc.style.display = show ? 'flex':'none';
+  if(buyBtn) buyBtn.style.display = show ? 'none':'inline-block';
+  if(show){
+    const numEl = document.getElementById(`qty-num-${baseId}`);
+    const vid = Object.keys(cart).find(k=>cart[k].baseId===baseId && Object.keys(cart[k].opts || {}).length===0);
+    numEl && (numEl.innerText = vid ? cart[vid].qty : 0);
   }
 }
 
-/* Options modal logic */
-function openOptModal(item){
-  currentOptFor = {item, selected:{}};
-  document.getElementById('optTitle').innerText = item.name;
-  document.getElementById('optDesc').innerText = `Base price: Rs. ${item.price}`;
-  const fields = document.getElementById('optFields');
-  fields.innerHTML = '';
-  // For each option group we will show choices (here we treat item.options as one group)
-  const group = document.createElement('div');
-  group.innerHTML = `<div style="font-weight:800;margin-top:8px">Options</div>`;
-  const row = document.createElement('div'); row.className='opt-row';
-  item.options.forEach((o,idx)=>{
-    const b = document.createElement('button'); b.className='opt-btn'; b.innerText = `${o.name}${o.delta?(' (+'+o.delta+')'):''}`;
-    b.onclick = ()=> {
-      // mark selected
-      Array.from(row.children).forEach(ch=>ch.classList.remove('active'));
-      b.classList.add('active');
-      currentOptFor.selected = o;
-    };
-    row.appendChild(b);
-  });
-  group.appendChild(row);
-  // quantity selector inside modal
-  group.innerHTML += `<div style="margin-top:10px;display:flex;gap:8px;align-items:center"><div style="font-weight:700">Quantity</div>
-    <div style="margin-left:8px">
-      <button class="qty-btn" onclick="modalChangeQty(-1)">−</button>
-      <span id="modalQty" style="padding:0 8px;font-weight:800">1</span>
-      <button class="qty-btn" onclick="modalChangeQty(1)">+</button>
-    </div>
-  </div>`;
-  fields.appendChild(group);
-  // set default selection if exists
-  if(item.options && item.options.length>0){
-    currentOptFor.selected = item.options[0];
-    // make first button active
-    setTimeout(()=> { row.children[0].classList.add('active') },30);
+/* Deal buy handlers (shows qty inline on the deal card) */
+function handleDealBuy(dealId, price){
+  // Add deal directly to cart and show qty controls
+  const id = variantId(dealId, {deal:'1'});
+  const dealBase = deals.find(d=>d.id===dealId);
+  if(!cart[id]) cart[id] = {variantId:id, baseId:dealId, name:dealBase.title, price:price, qty:0, img:dealBase.img, opts:{}};
+  cart[id].qty += 1;
+  toggleDealQtyControls(dealId, true);
+  updateCartDisplay();
+}
+function increaseDeal(dealId, price){
+  const id = variantId(dealId, {deal:'1'});
+  if(!cart[id]) {
+    const dealBase = deals.find(d=>d.id===dealId);
+    cart[id] = {variantId:id, baseId:dealId, name:dealBase.title, price:price, qty:0, img:dealBase.img, opts:{}};
   }
-  document.getElementById('modalQty').dataset.qty = 1;
-  document.getElementById('modalQty').innerText = 1;
-  document.getElementById('optModal').classList.add('active');
+  cart[id].qty += 1;
+  document.getElementById(`deal-qty-num-${dealId}`).innerText = cart[id].qty;
+  updateCartDisplay();
 }
-
-function modalChangeQty(delta){
-  const el = document.getElementById('modalQty');
-  let q = Number(el.dataset.qty||1);
-  q += delta;
-  if(q<1) q=1;
-  el.dataset.qty=q;
-  el.innerText=q;
+function decreaseDeal(dealId, price){
+  const id = variantId(dealId, {deal:'1'});
+  if(!cart[id]) return;
+  cart[id].qty = Math.max(0, cart[id].qty - 1);
+  if(cart[id].qty===0) delete cart[id];
+  document.getElementById(`deal-qty-num-${dealId}`).innerText = cart[id] ? cart[id].qty : 0;
+  updateCartDisplay();
+  const exists = Object.keys(cart).some(k=>cart[k].baseId===dealId);
+  toggleDealQtyControls(dealId, exists);
 }
-
-/* Confirm options modal: add to cart */
-function confirmOpt(){
-  if(!currentOptFor) return;
-  const qty = Number(document.getElementById('modalQty').dataset.qty||1);
-  const it = currentOptFor.item;
-  const opt = currentOptFor.selected;
-  const optsLabel = opt?opt.name:'';
-  const finalPrice = it.price + (opt?opt.delta:0);
-  // create unique key for item+option
-  const key = `${it.id}__${opt?opt.key:'noopt'}`;
-  if(!cart[key]) cart[key] = {id:it.id, name:it.name, optsLabel:optsLabel, price:finalPrice, qty:0, img:it.img};
-  cart[key].qty += qty;
-  // show qty controls for base item as well (even though cart tracks variants)
-  const controls = document.getElementById(`controls-${it.id}`);
-  if(controls) controls.style.display='inline-flex';
-  updateAllQtyDisplays();
-  saveAndRenderCart();
-  closeOpt();
-}
-
-/* close modal */
-function closeOpt(){ document.getElementById('optModal').classList.remove('active'); currentOptFor=null; }
-
-/* quantity change for basic UI plus/minus for no-option items:
-   For items without options we map to key id__noopt
-*/
-function changeQty(id,delta){
-  const it = findItem(id);
-  if(!it) return;
-  // If item has options, this UI should only affect default no-option mapping
-  let key;
-  if(it.options && it.options.length>0){
-    // if user used controls for item with options (should be hidden normally), treat as noopt
-    key = `${it.id}__${it.options[0]?it.options[0].key:'noopt'}`;
-    // defaulting to first option if someone uses controls (rare)
-  }else{
-    key = `${it.id}__noopt`;
+function toggleDealQtyControls(dealId, show){
+  const qc = document.getElementById(`deal-qty-${dealId}`);
+  const buyBtn = document.getElementById(`deal-buy-${dealId}`);
+  if(qc) qc.style.display = show ? 'flex':'none';
+  if(buyBtn) buyBtn.style.display = show ? 'none':'inline-block';
+  if(show){
+    const num = document.getElementById(`deal-qty-num-${dealId}`);
+    const id = Object.keys(cart).find(k=>cart[k].baseId===dealId);
+    num && (num.innerText = id ? cart[id].qty : 0);
   }
-  if(!cart[key]) cart[key] = {id:it.id, name:it.name, optsLabel:(it.options&&it.options.length>0? (it.options[0].name) : ''), price: it.price + ((it.options&&it.options.length>0)?(it.options[0].delta||0):0), qty:0, img:it.img};
-  cart[key].qty += delta;
-  if(cart[key].qty < 0) cart[key].qty = 0;
-  // if qty becomes 0 and item has no options, hide controls
-  updateAllQtyDisplays();
-  saveAndRenderCart();
 }
 
-/* update small qty numbers under items using cart state */
-function updateAllQtyDisplays(){
-  // set all to 0 first
-  menuSections.forEach(sec=>{
-    sec.items.forEach(it=>{
-      const qel = document.getElementById(`qty-${it.id}`);
-      if(qel) qel.innerText = 0;
-    });
-  });
-  // sum per base id grouping: when variants exist, we show controls as total quantity of that base id
-  const totals = {};
-  for(const k in cart){
-    const entry = cart[k];
-    if(!totals[entry.id]) totals[entry.id]=0;
-    totals[entry.id] += entry.qty;
+/* Cart rendering and WhatsApp builder */
+function updateCartDisplay(){
+  let totalQty=0, totalPrice=0;
+  for(const k of Object.keys(cart)) {
+    totalQty += cart[k].qty;
+    totalPrice += cart[k].qty * cart[k].price;
   }
-  for(const bid in totals){
-    const qel = document.getElementById(`qty-${bid}`);
-    if(qel) qel.innerText = totals[bid];
-  }
-  // hide any controls for items with total 0
-  menuSections.forEach(sec=>{
-    sec.items.forEach(it=>{
-      const controls = document.getElementById(`controls-${it.id}`);
-      const tot = totals[it.id]||0;
-      if(controls) controls.style.display = (tot>0 ? 'inline-flex' : 'none');
-    });
-  });
-}
+  document.getElementById('cartCount').innerText = totalQty;
+  document.getElementById('cartTotal').innerText = 'Rs. ' + totalPrice;
+  document.getElementById('grandTotal').innerText = 'Total: Rs. ' + totalPrice;
 
-/* Render checkout panel from cart */
-function saveAndRenderCart(){
-  // remove zero qty entries
-  for(const k in {...cart}) if(cart[k].qty===0) delete cart[k];
-  const list = document.getElementById('checkoutList');
-  list.innerHTML = '';
-  let total = 0;
-  let totalItems = 0;
-  for(const k in cart){
+  const list = document.getElementById('checkoutList'); list.innerHTML = '';
+  if(Object.keys(cart).length===0){
+    list.innerHTML = '<p style="text-align:center;color:var(--muted)">Your cart is empty.</p>';
+    return;
+  }
+  for(const k of Object.keys(cart)){
     const it = cart[k];
-    total += it.price * it.qty;
-    totalItems += it.qty;
-    const div = document.createElement('div');
-    div.className='checkout-item';
-    div.innerHTML = `
-      <img src="images/${it.img}" alt="${it.name}" onerror="this.style.opacity='.35'">
-      <div class="info">
-        <h4 style="margin-bottom:6px">${it.name}${it.optsLabel?(' ('+it.optsLabel+')'):''}</h4>
-        <div style="font-size:13px;color:var(--muted)">${it.qty} x Rs. ${it.price}</div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-weight:900;color:var(--accent)">Rs. ${it.price * it.qty}</div>
-        <div style="margin-top:8px;display:flex;gap:6px;justify-content:flex-end">
-          <button class="qty-btn" onclick="cartChangeQty('${k}',-1)">−</button>
-          <div style="padding:6px 8px;background:#fff;border-radius:8px;font-weight:800">${it.qty}</div>
-          <button class="qty-btn" onclick="cartChangeQty('${k}',1)">+</button>
-        </div>
-      </div>
-    `;
+    if(it.qty<=0) continue;
+    const div = document.createElement('div'); div.className='checkout-item';
+    div.innerHTML = `<img src="${it.img}" alt="${it.name}"><div style="flex:1"><div style="font-weight:900">${it.name}</div><div style="color:var(--muted);font-size:13px">${it.qty} x Rs. ${it.price}</div></div>
+      <div style="text-align:right"><div style="font-weight:900">Rs. ${it.qty * it.price}</div>
+      <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+        <button class="qty-btn" onclick="changeCartQty('${k}',-1)">−</button>
+        <div style="min-width:22px;text-align:center">${it.qty}</div>
+        <button class="qty-btn" onclick="changeCartQty('${k}',1)">+</button>
+      </div></div>`;
     list.appendChild(div);
   }
-  document.getElementById('cartCount').innerText = totalItems;
-  document.getElementById('cartTotal').innerText = 'Rs. '+total;
-  document.getElementById('grandTotal').innerText = 'Total: Rs. '+total;
-  // auto-hide cart bar if empty
-  document.getElementById('cartBar').style.display = totalItems>0 ? 'flex' : 'none';
-  // keep checkout panel closed unless opened
+}
+function changeCartQty(variantKey,delta){
+  if(!cart[variantKey]) return;
+  cart[variantKey].qty += delta;
+  if(cart[variantKey].qty<=0) delete cart[variantKey];
+  updateCartDisplay();
+  const base = cart[variantKey] ? cart[variantKey].baseId : variantKey.split('|')[0];
+  const exists = Object.keys(cart).some(k=>cart[k].baseId===base);
+  // sync item card toggles
+  toggleQtyControls(base, exists);
+  // sync deal toggles
+  if(document.getElementById(`deal-qty-${base}`) !== null) toggleDealQtyControls(base, exists);
 }
 
-/* change qty in cart by key */
-function cartChangeQty(key,delta){
-  if(!cart[key]) return;
-  cart[key].qty += delta;
-  if(cart[key].qty < 0) cart[key].qty = 0;
-  saveAndRenderCart();
-  updateAllQtyDisplays();
-}
-
-/* open / close checkout */
-function openCheckout(){
-  if(Object.keys(cart).length===0){ alert('Add items to cart first!'); return; }
-  document.getElementById('checkoutPanel').classList.add('active');
-}
+/* open/close checkout */
+function openCheckout(){ document.getElementById('checkoutPanel').classList.add('active'); }
 function closeCheckout(){ document.getElementById('checkoutPanel').classList.remove('active'); }
 
-/* handle deal buy: treat deals as special items without options */
-function handleDealBuy(dealId){
-  const d = deals.find(x=>x.id===dealId);
-  if(!d) return;
-  const key = `deal__${dealId}`;
-  if(!cart[key]) cart[key] = {id:key, name:d.title, optsLabel:'', price:(typeof d.price==='number'?d.price:0), qty:0, img:'deal.jpg'};
-  cart[key].qty += 1;
-  saveAndRenderCart();
-  updateAllQtyDisplays();
-  document.getElementById('cartBar').style.display = 'flex';
-}
-
-/* Build & send WhatsApp order with bullet points */
+/* WhatsApp order builder */
 function sendOrder(){
-  if(Object.keys(cart).length===0) return alert('Cart is empty');
-  const lines = [];
-  lines.push('Assalamualaikum');
-  lines.push('I want to place an order:');
-  for(const k in cart){
+  if(Object.keys(cart).length===0){ alert('Cart is empty'); return; }
+  let lines = [];
+  lines.push('Assalamualaikum, I want to place an order:');
+  for(const k of Object.keys(cart)){
     const it = cart[k];
-    const name = it.name + (it.optsLabel?(' ('+it.optsLabel+')'):'');
-    lines.push(`• ${name} x ${it.qty} = Rs ${it.price * it.qty}`);
+    if(it.qty<=0) continue;
+    lines.push('• ' + it.name + ' x ' + it.qty + ' = Rs ' + (it.price * it.qty));
   }
+  let total=0; Object.keys(cart).forEach(k=> total += (cart[k].price * cart[k].qty));
   lines.push('');
-  lines.push(`Total: Rs ${Object.values(cart).reduce((s,it)=>s+it.price*it.qty,0)}`);
-  lines.push('Name:');
-  lines.push('Phone:');
-  lines.push('Address:');
-  const text = lines.join('\n');
-  const encoded = encodeURIComponent(text);
-  const url = `https://wa.me/${PHONE_NUMBER}?text=${encoded}`;
+  lines.push('Total: Rs ' + total);
+  lines.push('Name: ');
+  lines.push('Phone: ');
+  lines.push('Address: ');
+  const msg = lines.join('\n');
+  const url = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(msg);
   window.open(url,'_blank');
 }
 
-/* small init */
-function init(){
-  createCategoryNav();
-  renderDeals();
-  renderMenu();
-  initQtyUI();
-  saveAndRenderCart(); // set initial cart UI
+/* init state (all qty controls hidden, buy shown) */
+function initZeroState(){
+  items.forEach(i=>{ toggleQtyControls(i.id, false); });
+  deals.forEach(d=>{ toggleDealQtyControls(d.id, false); });
+  updateCartDisplay();
 }
-init();
+initZeroState();
 
 </script>
 </body>
