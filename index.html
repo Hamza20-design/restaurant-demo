@@ -97,7 +97,7 @@ header{
 </head>
 <body>
 <header>
-  <img src="images/logo.png" class="header-logo" alt="logo" />
+  <img src="logo.png" class="header-logo" alt="logo" />
   <div>
     <div class="header-title">Abdul Hadi Fast Food</div>
     <div class="header-sub">Order online · Confirmed by voice · Fast delivery</div>
@@ -295,15 +295,15 @@ header{
 const PHONE = '92' + '3158377135'; // change if needed
 
 const deals = [
-  {id:'deal1', title:'Deal 1 — Buy 4 zinger get 1 free', price:1000, img:'images/deal_1.jpg'},
-  {id:'deal2', title:'Deal 2 — 2 zinger + Next Cola 245ml', price:550, img:'images/deal_2.jpg'},
-  {id:'deal3', title:'Deal 3 — 1 zinger + 1 club + Next Cola 1L', price:600, img:'images/deal_3.jpg'},
-  {id:'deal4', title:'Deal 4 — 2 zinger + free fries', price:500, img:'images/deal_4.jpg'},
-  {id:'deal5', title:'Deal 5 — 1 zinger + 1 club + 2 ice cream', price:750, img:'images/deal_5.jpg'},
-  {id:'deal6', title:'Deal 6 — 3 zinger + Next Cola 1L', price:850, img:'images/deal_6.jpg'},
-  {id:'deal7', title:'Deal 7 — 1 QTR broast (leg) + 1 club + 1 zinger', price:800, img:'images/deal_7.jpg'},
-  {id:'deal8', title:'Deal 8 — 2 zinger + 1 club + 1 chicken roll', price:850, img:'images/deal_8.jpg'},
-  {id:'family', title:'Family Deal — 2 zinger,2 chicken burger,1 club,2 zinger roll,1 next cola 1L', price:1700, img:'images/family_deal.jpg'}
+  {id:'deal1', title:'Deal 1 — Buy 4 zinger get 1 free', price:1000, img:'deal_1.jpg'},
+  {id:'deal2', title:'Deal 2 — 2 zinger + Next Cola 245ml', price:550, img:'deal_2.jpg'},
+  {id:'deal3', title:'Deal 3 — 1 zinger + 1 club + Next Cola 1L', price:600, img:'deal_3.jpg'},
+  {id:'deal4', title:'Deal 4 — 2 zinger + free fries', price:500, img:'deal_4.jpg'},
+  {id:'deal5', title:'Deal 5 — 1 zinger + 1 club + 2 ice cream', price:750, img:'deal_5.jpg'},
+  {id:'deal6', title:'Deal 6 — 3 zinger + Next Cola 1L', price:850, img:'deal_6.jpg'},
+  {id:'deal7', title:'Deal 7 — 1 QTR broast (leg) + 1 club + 1 zinger', price:800, img:'deal_7.jpg'},
+  {id:'deal8', title:'Deal 8 — 2 zinger + 1 club + 1 chicken roll', price:850, img:'deal_8.jpg'},
+  {id:'family', title:'Family Deal — 2 zinger,2 chicken burger,1 club,2 zinger roll,1 next cola 1L', price:1700, img:'family_deal.jpg'}
 ];
 
 // utility to create an ID for item variant in cart
@@ -313,75 +313,75 @@ function variantId(baseId, opts){ return baseId + '|' + Object.values(opts).join
 const items = [
   {id:'zinger', name:'Zinger Burger', price:250, img:'zinger_burger.jpg', category:'burgers',
     options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
-  {id:'zinger_mini', name:'Mini Burger', price:200, img:'images/mini_burger.jpg', category:'burgers',
+  {id:'zinger_mini', name:'Mini Burger', price:200, img:'mini_burger.jpg', category:'burgers',
     options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
-  {id:'jumbo_zinger', name:'Jumbo Zinger', price:450, img:'images/jumbo_zinger.jpg', category:'burgers',
+  {id:'jumbo_zinger', name:'Jumbo Zinger', price:450, img:'jumbo_zinger.jpg', category:'burgers',
     options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
-  {id:'chicken_burger', name:'Chicken Burger', price:250, img:'images/chicken_burger.jpg', category:'burgers',
+  {id:'chicken_burger', name:'Chicken Burger', price:250, img:'chicken_burger.jpg', category:'burgers',
     options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
-  {id:'beef_burger', name:'Beef Burger', price:300, img:'images/beef_burger.jpg', category:'burgers',
+  {id:'beef_burger', name:'Beef Burger', price:300, img:'beef_burger.jpg', category:'burgers',
     options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
-  {id:'tow_in_one', name:'Tow in One Burger', price:500, img:'images/two_in_one.jpg', category:'burgers'},
-  {id:'jumbo_beef', name:'Jumbo Beef Burger', price:450, img:'images/beef_jumbo.jpg', category:'burgers'},
+  {id:'tow_in_one', name:'Tow in One Burger', price:500, img:'two_in_one.jpg', category:'burgers'},
+  {id:'jumbo_beef', name:'Jumbo Beef Burger', price:450, img:'beef_jumbo.jpg', category:'burgers'},
 
-  {id:'chicken_sandwich', name:'Chicken Sandwich', price:200, img:'images/chicken_sandwich.jpg', category:'sandwiches',
+  {id:'chicken_sandwich', name:'Chicken Sandwich', price:200, img:'chicken_sandwich.jpg', category:'sandwiches',
     options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
-  {id:'club_sandwich', name:'Club Sandwich', price:250, img:'images/club_sandwich.jpg', category:'sandwiches',
+  {id:'club_sandwich', name:'Club Sandwich', price:250, img:'club_sandwich.jpg', category:'sandwiches',
     options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
-  {id:'crispy_sandwich', name:'Crispy Sandwich', price:300, img:'images/crispy_sandwich.jpg', category:'sandwiches',
+  {id:'crispy_sandwich', name:'Crispy Sandwich', price:300, img:'crispy_sandwich.jpg', category:'sandwiches',
     options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
-  {id:'bbq_sandwich', name:'BBQ Sandwich', price:350, img:'images/bbq_sandwich.jpg', category:'sandwiches'},
-  {id:'malai_sandwich', name:'Malai Sandwich', price:400, img:'images/malai_sandwich.jpg', category:'sandwiches'},
+  {id:'bbq_sandwich', name:'BBQ Sandwich', price:350, img:'bbq_sandwich.jpg', category:'sandwiches'},
+  {id:'malai_sandwich', name:'Malai Sandwich', price:400, img:'malai_sandwich.jpg', category:'sandwiches'},
 
-  {id:'qtr_chest', name:'Qtr Broast', price:350, img:'images/qtr_broast.jpg', category:'broast', options:{part:{type:'select',label:'Part',values:{chest:50,leg:0}}}},
-  {id:'crispy_broast', name:'Crispy Broast', price:400, img:'images/crispy_broast.jpg', category:'broast', options:{part:{type:'select',label:'Part',values:{chest:50,leg:0}}}},
-  {id:'spicy_broast', name:'Spicy Broast', price:500, img:'images/spicy_broast.jpg', category:'broast'},
+  {id:'qtr_chest', name:'Qtr Broast', price:350, img:'qtr_broast.jpg', category:'broast', options:{part:{type:'select',label:'Part',values:{chest:50,leg:0}}}},
+  {id:'crispy_broast', name:'Crispy Broast', price:400, img:'crispy_broast.jpg', category:'broast', options:{part:{type:'select',label:'Part',values:{chest:50,leg:0}}}},
+  {id:'spicy_broast', name:'Spicy Broast', price:500, img:'spicy_broast.jpg', category:'broast'},
 
-  {id:'chapati', name:'Chapati', price:20, img:'images/chapati.jpg', category:'naan'},
-  {id:'puri_small', name:'Puri Paratha Small', price:50, img:'images/puri_small.jpg', category:'naan'},
-  {id:'puri', name:'Puri Paratha', price:80, img:'images/puri.jpg', category:'naan'},
+  {id:'chapati', name:'Chapati', price:20, img:'chapati.jpg', category:'naan'},
+  {id:'puri_small', name:'Puri Paratha Small', price:50, img:'puri_small.jpg', category:'naan'},
+  {id:'puri', name:'Puri Paratha', price:80, img:'puri.jpg', category:'naan'},
 
-  {id:'plain_fries', name:'Plain Fries', price:100, img:'images/plain_fries.jpg', category:'fries'},
-  {id:'masala_fries', name:'Masala Fries', price:100, img:'images/masala_fries.jpg', category:'fries'},
-  {id:'mayo_fries', name:'Mayo Fries', price:150, img:'images/mayo_fries.jpg', category:'fries'},
-  {id:'mayo_garlic_fries', name:'Mayo Garlic Fries', price:200, img:'images/mayo_garlic_fries.jpg', category:'fries'},
+  {id:'plain_fries', name:'Plain Fries', price:100, img:'plain_fries.jpg', category:'fries'},
+  {id:'masala_fries', name:'Masala Fries', price:100, img:'masala_fries.jpg', category:'fries'},
+  {id:'mayo_fries', name:'Mayo Fries', price:150, img:'mayo_fries.jpg', category:'fries'},
+  {id:'mayo_garlic_fries', name:'Mayo Garlic Fries', price:200, img:'mayo_garlic_fries.jpg', category:'fries'},
 
-  {id:'pizza_fries', name:'Pizza Fries', price:300, img:'images/pizza_fries_med.jpg', category:'pizza-fries', options:{size:{type:'select',label:'Size',values:{medium:0,large:100}}}},
-  {id:'matkka_fries', name:'Matkka Fries', price:350, img:'images/matka_fries_med.jpg', category:'pizza-fries', options:{size:{type:'select',label:'Size',values:{medium:0,large:250}}}},
-  {id:'chicken_fries', name:'Chicken Fries', price:250, img:'images/chicken_fries_med.jpg', category:'pizza-fries', options:{size:{type:'select',label:'Size',values:{medium:0,large:100}}}},
+  {id:'pizza_fries', name:'Pizza Fries', price:300, img:'pizza_fries_med.jpg', category:'pizza-fries', options:{size:{type:'select',label:'Size',values:{medium:0,large:100}}}},
+  {id:'matkka_fries', name:'Matkka Fries', price:350, img:'matka_fries_med.jpg', category:'pizza-fries', options:{size:{type:'select',label:'Size',values:{medium:0,large:250}}}},
+  {id:'chicken_fries', name:'Chicken Fries', price:250, img:'chicken_fries_med.jpg', category:'pizza-fries', options:{size:{type:'select',label:'Size',values:{medium:0,large:100}}}},
 
-  {id:'chicken_boti', name:'Chicken Boti', price:350, img:'images/chicken_boti.jpg', category:'boti'},
-  {id:'beef_boti', name:'Beef Boti', price:450, img:'images/beef_boti.jpg', category:'boti'},
-  {id:'malai_boti', name:'Malai Boti', price:400, img:'images/malai_boti.jpg', category:'boti'},
-  {id:'bihari_boti', name:'Bihari Boti', price:400, img:'images/bihari_boti.jpg', category:'boti', options:{meat:{type:'select',label:'Meat',values:{chicken:0,beef:50}}}},
+  {id:'chicken_boti', name:'Chicken Boti', price:350, img:'chicken_boti.jpg', category:'boti'},
+  {id:'beef_boti', name:'Beef Boti', price:450, img:'beef_boti.jpg', category:'boti'},
+  {id:'malai_boti', name:'Malai Boti', price:400, img:'malai_boti.jpg', category:'boti'},
+  {id:'bihari_boti', name:'Bihari Boti', price:400, img:'bihari_boti.jpg', category:'boti', options:{meat:{type:'select',label:'Meat',values:{chicken:0,beef:50}}}},
 
-  {id:'chicken_tikka', name:'Chicken Tikka', price:400, img:'images/chicken_tikka_chest.jpg', category:'barbeque', options:{part:{type:'select',label:'Part',values:{chest:50,leg:0}}}},
-  {id:'malai_tikka', name:'Malai Tikka', price:450, img:'images/malai_tikka.jpg', category:'barbeque'},
-  {id:'green_tikka', name:'Green Tikka', price:450, img:'images/green_tikka.jpg', category:'barbeque'},
+  {id:'chicken_tikka', name:'Chicken Tikka', price:400, img:'chicken_tikka_chest.jpg', category:'barbeque', options:{part:{type:'select',label:'Part',values:{chest:50,leg:0}}}},
+  {id:'malai_tikka', name:'Malai Tikka', price:450, img:'malai_tikka.jpg', category:'barbeque'},
+  {id:'green_tikka', name:'Green Tikka', price:450, img:'green_tikka.jpg', category:'barbeque'},
 
-  {id:'single_scope', name:'Single Scoop', price:100, img:'images/single_scoop.jpg', category:'icecream', options:{size:{type:'select',label:'Scoop',values:{single:0,double:80}}}},
+  {id:'single_scope', name:'Single Scoop', price:100, img:'single_scoop.jpg', category:'icecream', options:{size:{type:'select',label:'Scoop',values:{single:0,double:80}}}},
 
-  {id:'hot_sour_soup', name:'Hot & Sour Soup', price:180, img:'images/hot_sour_soup.jpg', category:'soups'},
-  {id:'corn_soup', name:'Corn Soup', price:150, img:'images/corn_soup.jpg', category:'soups'},
-  {id:'veg_soup', name:'Vegetable Soup', price:130, img:'images/veg_soup.jpg', category:'soups'},
+  {id:'hot_sour_soup', name:'Hot & Sour Soup', price:180, img:'hot_sour_soup.jpg', category:'soups'},
+  {id:'corn_soup', name:'Corn Soup', price:150, img:'corn_soup.jpg', category:'soups'},
+  {id:'veg_soup', name:'Vegetable Soup', price:130, img:'veg_soup.jpg', category:'soups'},
 
-  {id:'kitkat_shake', name:'Kitkat Shake', price:300, img:'images/kitkat_shake.jpg', category:'shakes'},
-  {id:'oreo_shake', name:'Oreo Shake', price:250, img:'images/oreo_shake.jpg', category:'shakes'},
-  {id:'strawberry_shake', name:'Strawberry Shake', price:250, img:'images/strawberry_shake.jpg', category:'shakes'},
+  {id:'kitkat_shake', name:'Kitkat Shake', price:300, img:'kitkat_shake.jpg', category:'shakes'},
+  {id:'oreo_shake', name:'Oreo Shake', price:250, img:'oreo_shake.jpg', category:'shakes'},
+  {id:'strawberry_shake', name:'Strawberry Shake', price:250, img:'strawberry_shake.jpg', category:'shakes'},
 
-  {id:'reshmy_kabab', name:'Reshmy Kabab', price:400, img:'images/reshmy_kabab.jpg', category:'kabab'},
-  {id:'gola_kabab', name:'Gola Kabab', price:400, img:'images/gola_kabab.jpg', category:'kabab'},
+  {id:'reshmy_kabab', name:'Reshmy Kabab', price:400, img:'reshmy_kabab.jpg', category:'kabab'},
+  {id:'gola_kabab', name:'Gola Kabab', price:400, img:'gola_kabab.jpg', category:'kabab'},
 
-  {id:'chicken_roll', name:'Chicken Roll', price:160, img:'images/chicken_roll.jpg', category:'rolls', options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
-  {id:'beef_roll', name:'Beef Roll', price:200, img:'images/beef_roll.jpg', category:'rolls'},
-  {id:'shawarma_roll', name:'Shawarma Roll', price:250, img:'images/shawarma_roll.jpg', category:'rolls'},
+  {id:'chicken_roll', name:'Chicken Roll', price:160, img:'chicken_roll.jpg', category:'rolls', options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
+  {id:'beef_roll', name:'Beef Roll', price:200, img:'beef_roll.jpg', category:'rolls'},
+  {id:'shawarma_roll', name:'Shawarma Roll', price:250, img:'shawarma_roll.jpg', category:'rolls'},
 
-  {id:'cold_drink_300', name:'Cold Drink 300ml', price:70, img:'images/cold_drink.jpg', category:'beverages'},
-  {id:'next_col_245', name:'Next Cola 245ml', price:90, img:'images/next_cola_245.jpg', category:'beverages'},
-  {id:'next_col_1l', name:'Next Cola 1 Litre', price:150, img:'images/next_cola_1l.jpg', category:'beverages'},
+  {id:'cold_drink_300', name:'Cold Drink 300ml', price:70, img:'cold_drink.jpg', category:'beverages'},
+  {id:'next_col_245', name:'Next Cola 245ml', price:90, img:'next_cola_245.jpg', category:'beverages'},
+  {id:'next_col_1l', name:'Next Cola 1 Litre', price:150, img:'next_cola_1l.jpg', category:'beverages'},
 
-  {id:'mayo_dip', name:'Mayo Sauce Dip', price:80, img:'images/mayo_dip.jpg', category:'extras'},
-  {id:'ketchup_dip', name:'Ketchup Dip', price:80, img:'images/ketchup_dip.jpg', category:'extras'}
+  {id:'mayo_dip', name:'Mayo Sauce Dip', price:80, img:'mayo_dip.jpg', category:'extras'},
+  {id:'ketchup_dip', name:'Ketchup Dip', price:80, img:'ketchup_dip.jpg', category:'extras'}
 ];
 
 // CART structure
