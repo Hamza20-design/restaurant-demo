@@ -303,7 +303,7 @@ const deals = [
   {id:'deal6', title:'Deal 6 — 3 zinger + Next Cola 1L', price:850, img:'images/deal_6.jpg'},
   {id:'deal7', title:'Deal 7 — 1 QTR broast (leg) + 1 club + 1 zinger', price:800, img:'images/deal_7.jpg'},
   {id:'deal8', title:'Deal 8 — 2 zinger + 1 club + 1 chicken roll', price:850, img:'images/deal_8.jpg'},
-  {id:'family', title:'Family Deal — 2 zinger,2 chicken burger,1 club,2 zinger roll,1 next cola 1L', price:1500, img:'images/family_deal.jpg'}
+  {id:'family', title:'Family Deal — 2 zinger,2 chicken burger,1 club,2 zinger roll,1 next cola 1L', price:1700, img:'images/family_deal.jpg'}
 ];
 
 // utility to create an ID for item variant in cart
@@ -312,16 +312,17 @@ function variantId(baseId, opts){ return baseId + '|' + Object.values(opts).join
 // items (kept same as you sent; image names same)
 const items = [
   {id:'zinger', name:'Zinger Burger', price:250, img:'images/zinger_burger.jpg', category:'burgers',
-    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}
+    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
   {id:'zinger_mini', name:'Mini Burger', price:200, img:'images/mini_burger.jpg', category:'burgers',
     options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
   {id:'jumbo_zinger', name:'Jumbo Zinger', price:450, img:'images/jumbo_zinger.jpg', category:'burgers',
-    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}, size:{type:'select',label:'Size',values:{regular:0,large:100}}}},
+    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
   {id:'chicken_burger', name:'Chicken Burger', price:250, img:'images/chicken_burger.jpg', category:'burgers',
-    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}, size:{type:'select',label:'Size',values:{regular:0,large:100}}}},
+    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
   {id:'beef_burger', name:'Beef Burger', price:300, img:'images/beef_burger.jpg', category:'burgers',
-    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}, size:{type:'select',label:'Size',values:{regular:0,large:100}}}},
+    options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
   {id:'tow_in_one', name:'Tow in One Burger', price:500, img:'images/two_in_one.jpg', category:'burgers'},
+  {id:'jumbo_beef', name:'Jumbo Beef Burger', price:450, img:'images/beef_jumbo.jpg', category:'burgers'},
 
   {id:'chicken_sandwich', name:'Chicken Sandwich', price:200, img:'images/chicken_sandwich.jpg', category:'sandwiches',
     options:{cheese:{type:'boolean',label:'With Cheese (+Rs50)',price:50}}},
@@ -340,13 +341,13 @@ const items = [
   {id:'puri_small', name:'Puri Paratha Small', price:50, img:'images/puri_small.jpg', category:'naan'},
   {id:'puri', name:'Puri Paratha', price:80, img:'images/puri.jpg', category:'naan'},
 
-  {id:'plain_fries', name:'Plain Fries', price:50, img:'images/plain_fries.jpg', category:'fries'},
+  {id:'plain_fries', name:'Plain Fries', price:100, img:'images/plain_fries.jpg', category:'fries'},
   {id:'masala_fries', name:'Masala Fries', price:100, img:'images/masala_fries.jpg', category:'fries'},
   {id:'mayo_fries', name:'Mayo Fries', price:150, img:'images/mayo_fries.jpg', category:'fries'},
   {id:'mayo_garlic_fries', name:'Mayo Garlic Fries', price:200, img:'images/mayo_garlic_fries.jpg', category:'fries'},
 
   {id:'pizza_fries', name:'Pizza Fries', price:300, img:'images/pizza_fries_med.jpg', category:'pizza-fries', options:{size:{type:'select',label:'Size',values:{medium:0,large:100}}}},
-  {id:'matkka_fries', name:'Matkka Fries', price:200, img:'images/matka_fries_med.jpg', category:'pizza-fries', options:{size:{type:'select',label:'Size',values:{medium:0,large:250}}}},
+  {id:'matkka_fries', name:'Matkka Fries', price:350, img:'images/matka_fries_med.jpg', category:'pizza-fries', options:{size:{type:'select',label:'Size',values:{medium:0,large:250}}}},
   {id:'chicken_fries', name:'Chicken Fries', price:250, img:'images/chicken_fries_med.jpg', category:'pizza-fries', options:{size:{type:'select',label:'Size',values:{medium:0,large:100}}}},
 
   {id:'chicken_boti', name:'Chicken Boti', price:350, img:'images/chicken_boti.jpg', category:'boti'},
